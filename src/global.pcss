@@ -1,0 +1,56 @@
+@import "tailwindcss/base";
+/* @import "./base.pcss"; */
+
+@import "tailwindcss/components";
+/* @import "./components.pcss"; */
+
+@import "tailwindcss/utilities";
+/* @import "./utilities.pcss"; */
+@layer base {
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+    #app {
+		@apply 
+			bg-gray-200;
+		display: grid;
+		grid-template-areas:
+			"sidebar main";
+		grid-template-columns: 1fr 3fr;
+	}
+    h1 {
+        @apply text-3xl font-black text-red-500;
+    }
+    h2 {
+        @apply text-2xl font-bold mt-12;
+    }
+    h3 {
+        @apply text-xl font-bold mt-8;
+    }
+    p {
+        @apply mt-4 leading-normal;
+    }
+    .sidebar {
+        width: 25vw;
+        @apply 
+            min-h-screen 
+            bg-gray-400 
+            fixed;
+    }
+    .sidebar-body {
+        @apply
+            py-12
+            pr-12
+            pl-24;
+    }
+    .sidebar-body h1 {
+        @apply
+            text-4xl;
+    }
+    main {
+        grid-column-start: 2;
+        width: 50%;
+        @apply p-12 min-h-screen;
+    }
+}
