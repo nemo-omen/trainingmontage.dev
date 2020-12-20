@@ -18,7 +18,8 @@
     nav {
         @apply
             flex
-            flex-row;
+            flex-row
+            px-12;
     }
     nav a {
         @apply
@@ -26,13 +27,17 @@
             transition-all
             duration-300
             px-2
-            py-4;
+            py-4
+            text-gray-100;
     }
     nav a:hover {
-        @apply 
-            bg-gray-300;
+        @apply
+            bg-gray-300
+            text-gray-900;
     }
     .active {
-        @apply bg-gray-300;
+        @apply
+            bg-gray-300
+            text-gray-900;
     }
 </style>

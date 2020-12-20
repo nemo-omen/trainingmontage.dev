@@ -11,7 +11,7 @@
         @apply
             flex
             flex-row
-            pl-24
+            px-12
             border-b
             border-gray-300;
     }

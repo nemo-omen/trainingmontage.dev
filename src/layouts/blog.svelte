@@ -1,5 +1,6 @@
 <script>
     import Header from '../components/Header.svelte';
+import Nav from '../components/Nav.svelte';
     import { send, receive } from '../helpers/crossfade.js';
     export let greeting;
     export let title;
@@ -7,7 +8,8 @@
     export let author;
 </script>
 <aside class="sidebar">
-    <Header/>
+    <!-- <Header/> -->
+    <Nav/>
     <section class="sidebar-body">
         <h1>{title}</h1>
         <p>{date}, {author}</p>
@@ -23,11 +25,6 @@
 <style>
 :global(.blog-body > * + *) {
     @apply mt-12;
-}
-:global(.blog-body p) {
-    @apply
-        text-2xl
-        leading-relaxed;
 }
 .sidebar-body h1 {
     @apply

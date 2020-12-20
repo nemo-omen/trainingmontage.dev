@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: mdsvex Test
+title: Mdsvex Test
 greeting: Hello, Sapper, Tailwind, and mdsvex!
 date: Friday, December 18, 2020
 author: Jeff Caldwell

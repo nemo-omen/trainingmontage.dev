@@ -9,13 +9,12 @@
 <script>
     import { send, receive } from '../../helpers/crossfade.js';
     import Header from '../../components/Header.svelte';
+    import Nav from '../../components/Nav.svelte';
     import { HeartIcon, RepeatIcon, MessageSquareIcon } from 'svelte-feather-icons';
 
     export let tweets = [];
 
-    console.log('tweets: ', tweets);
-
-    let punctuationArray = ['.', ',', ';', ':'];
+    // console.log('tweets: ', tweets);
 
     function replaceWithUserLinks(word) {
         if(word[0] === '@') {
@@ -25,19 +24,17 @@
     }
 
     function toWordArray(text) {
-        const wordArray = text.replace(/[.,;:`]/g,"").trim().split(' ');
+        const wordArray = text.replace(/[:`]/g,"").trim().split(' ');
         return wordArray;
     }
 
 
 </script>
 <aside class="sidebar">
-    <Header/>
-    <section class="sidebar-body">    
-        <h1>
-            trainingmontage
-        </h1>
-        <h1>twitter</h1>
+    <!-- <Header/> -->
+    <Nav/>
+    <section class="sidebar-body">
+        <h1>twitter feed</h1>
     </section>
 </aside>
 <main>
@@ -93,12 +90,15 @@
     }
     .tweet {
         margin-bottom: 3rem;
-        border: 1px solid #bababa;
         padding: 1rem;
         box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        @apply
+        border-gray-300
+            border
+            ;
     }
     .tweet > * + * {
         margin-top: 1rem;
