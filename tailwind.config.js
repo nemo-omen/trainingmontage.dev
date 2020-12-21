@@ -1,5 +1,4 @@
 const { tailwindExtractor } = require("tailwindcss/lib/lib/purgeUnusedStyles");
-const gridTemplatePlugin = require("tailwindcss-grid-template");
 
 module.exports = {
 	purge: {
@@ -21,30 +20,10 @@ module.exports = {
 		},
 	},
 	theme: {
-		gridTemplateRow: {
-			fr: "1fr",
-			min: "min-content",
-			max: "max-content",
-			auto: "auto",
-			full: "100%",
-			default: "minmax(0,1fr)",
-		},
-		gridTemplateColumn: {
-			fr: "1fr",
-			min: "min-content",
-			max: "max-content",
-			auto: "auto",
-			full: "100%",
-			default: "minmax(0,1fr)",
-		},
 		extend: {},
 	},
 	variants: {
-		gridTemplateRow: ["responsive"],
-		gridTemplateColumn: ["responsive"],
 		extend: {},
 	},
-	plugins: [
-		gridTemplatePlugin
-	],
+	plugins: [],
 };

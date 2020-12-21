@@ -3,7 +3,7 @@ title: Blogs to Follow
 subtitle: A living collection of blogs and email lists I find useful.
 author: Jeff Caldwell
 date: "Wednesday, December 3, 2020"
-description: If you're pursuing web-dev, it's a good idea to read-up on developments, techniques, and other funn stuff people are working on.
+description: If you're pursuing web-dev, it's a good idea to read-up on developments, techniques, and other fun stuff people are working on.
 layout: blog
 tags: ['post', 'dev', 'webdev', 'design', 'blogs']
 ---

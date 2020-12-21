@@ -1,6 +1,5 @@
 <script context="module">
 	export const preload = () => {};
-	import Header from '../components/Header.svelte';
 </script>
 
 <script>

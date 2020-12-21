@@ -15,8 +15,9 @@
 
 <Sidebar
     title="blog"
+    expo="Thoughts on web development, web design, and anything else I think about."
 >
-    <p>Thoughts on web development, web design, and anything else I think about.</p>
+
 </Sidebar>
 
 <main>

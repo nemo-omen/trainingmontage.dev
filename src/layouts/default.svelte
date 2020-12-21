@@ -12,9 +12,11 @@
         {expo}
     />
 <main>
-    <slot>
-        <!-- your mdsvex content will load here -->
-    </slot>
+    <section class="post-section">
+        <slot>
+            <!-- your mdsvex content will load here -->
+        </slot>
+    </section>
 </main>
 
 <style>

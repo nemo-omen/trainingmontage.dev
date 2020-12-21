@@ -358,9 +358,10 @@ Okay, so it's ugly. But, hey, it works! Let's add some stuff to the `blog.svelte
 		@apply text-xl font-bold mt-8;
 	}
 	:global(p) {
-		@apply mt-4 leading-normal;
+		@apply mt-4;
 	}
 </style>
+
 ```
 <img src="img/posts/12-15-20/12-15-20_Screenshot05.png" alt="Very stylish version of an mdsvex component" loading="lazy" width="800" height="450">
 

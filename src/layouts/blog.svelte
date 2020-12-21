@@ -17,17 +17,17 @@
         expo={description}
     />
 <main>
-    <section class="blog-body">
+    <section class="post-section">
         <slot></slot>
     </section>
 </main>
 
 <style>
-:global(.blog-body > * + *) {
+:global(.post-section > * + *) {
     @apply mt-12;
 }
 
-:global(.blog-body pre) {
+:global(.post-section pre) {
     margin-top: 3rem !important;
     background-color: rgb(31, 41, 55) !important;
     border-radius: 0 !important;
@@ -38,7 +38,7 @@
     @apply text-blue-900;
 }
 
-:global(.blog-body pre code) {
+:global(.post-section pre code) {
     @apply
         bg-gray-800;
     font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;

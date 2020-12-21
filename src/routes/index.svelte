@@ -10,11 +10,6 @@
 </script>
 
 <script>
-	import { onMount } from 'svelte';
-	import Header from '../components/Header.svelte';
-	import { send, receive } from '../helpers/crossfade.js'
-	import ExampleComponent from "../components/ExampleComponent.svelte";
-	import Nav from '../components/Nav.svelte';
 	import Sidebar from '../components/Sidebar.svelte';
 	import PostItem from '../components/PostItem.svelte'
 	import TweetItem from '../components/TweetItem.svelte';

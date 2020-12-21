@@ -48,7 +48,8 @@
         lg:text-xl
         md:text-base
         sm:text-base
-        text-base;
+        text-base
+        leading-relaxed;
 }
 .sidebar-body > * + * {
     @apply
@@ -60,15 +61,15 @@
         ;
 }
 
-.sidebar-body h1 {
+.sidebar-body hgroup h1 {
     @apply
         xl:text-6xl
         lg:text-5xl
         md:text-4xl
         sm:text-3xl
         text-3xl
-        leading-tight
         font-semibold;
+    line-height: 1.3 !important;
 }
 
 .meta {
@@ -78,8 +79,8 @@
 }
 .meta p {
     @apply
-        text-base
-        leading-snug;
+        text-base;
+    line-height: 1 !important;
 }
 .meta p + * {
     @apply
