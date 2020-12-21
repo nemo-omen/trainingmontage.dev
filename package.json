@@ -62,6 +62,7 @@
     "svelte-feather-icons": "^3.3.0",
     "svelte-preprocess": "^4.6.1",
     "tailwindcss": "^2.0.2",
+    "tailwindcss-grid-template": "^0.0.3",
     "twitter-lite": "^0.14.0"
   },
   "prettier": {

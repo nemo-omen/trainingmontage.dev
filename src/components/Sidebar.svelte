@@ -29,23 +29,44 @@
 .sidebar {
     @apply
         bg-gray-800
-        text-gray-200;
+        text-gray-200
+        ;
 }
-
 
 .sidebar-body {
     @apply
-        p-12;
+        xl:p-12
+        lg:p-12
+        md:p-8
+        sm:p-8
+        p-8;
 }
 
+.sidebar-body p {
+    @apply
+        xl:text-xl
+        lg:text-xl
+        md:text-base
+        sm:text-base
+        text-base;
+}
 .sidebar-body > * + * {
     @apply
-        mt-24;
+        xl:mt-24
+        lg:mt-16
+        md:mt-12
+        sm:mt-8
+        mt-8
+        ;
 }
 
 .sidebar-body h1 {
     @apply
-        text-6xl
+        xl:text-6xl
+        lg:text-5xl
+        md:text-4xl
+        sm:text-3xl
+        text-3xl
         leading-tight
         font-semibold;
 }
@@ -69,9 +90,25 @@
         italic;
 }
 
+:global(.extra h2) {
+    @apply
+        xl:text-3xl
+        lg:text-2xl
+        md:text-xl
+        sm:text-xl
+        text-xl;
+}
 :global(.extra > h2 + *) {
     @apply
         mt-4;
+}
+:global(.extra p) {
+    @apply
+        xl:text-xl
+        lg:text-xl
+        md:text-lg
+        sm:text-base
+        text-base;
 }
 :global(.extra > p + p) {
     @apply

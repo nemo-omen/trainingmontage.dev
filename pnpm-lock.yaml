@@ -33,6 +33,7 @@ devDependencies:
   svelte-feather-icons: 3.3.0
   svelte-preprocess: 4.6.1_6ecf774509fcdb5240d8300e48532c60
   tailwindcss: 2.0.2_postcss@8.2.1
+  tailwindcss-grid-template: 0.0.3_tailwindcss@2.0.2
   twitter-lite: 0.14.0
 lockfileVersion: 5.2
 packages:
@@ -4239,6 +4240,14 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-wmEc8m4fjnob4gt5riFRtTu/6+4rSe12TpAELNSqHMfF3IqnA+CH37USM6/YR3qRZv7e56kAEAtd6nKZaxe0Ug==
+  /tailwindcss-grid-template/0.0.3_tailwindcss@2.0.2:
+    dependencies:
+      tailwindcss: 2.0.2_postcss@8.2.1
+    dev: true
+    peerDependencies:
+      tailwindcss: ^2.0.1
+    resolution:
+      integrity: sha512-2Jw0OK6JVeUu3z3xe1QrnKcCyrwZUCFyR3GRTpHiDwzXKb1WS5bp2T4xjPwGo0NJIWt0yRsNE3iYHV3AgFKCKA==
   /tailwindcss/2.0.2_postcss@8.2.1:
     dependencies:
       '@fullhuman/postcss-purgecss': 3.1.0_postcss@8.2.1
@@ -4542,4 +4551,5 @@ specifiers:
   svelte-feather-icons: ^3.3.0
   svelte-preprocess: ^4.6.1
   tailwindcss: ^2.0.2
+  tailwindcss-grid-template: ^0.0.3
   twitter-lite: ^0.14.0

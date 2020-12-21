@@ -21,7 +21,12 @@
         @apply
             flex
             flex-row
-            px-12;
+            xl:px-12
+            lg:px-12
+            md:px-8
+            sm:px-8
+            px-8
+            ;
     }
     nav a {
         @apply

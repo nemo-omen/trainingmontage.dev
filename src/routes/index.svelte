@@ -24,8 +24,8 @@
 </script>
 
 <Sidebar
-	title={"trainingmontage"}
-	expo="I'm Jeff Caldwell, a computere science student who loves web development and JavaScript. I write about the things I'm learning here.">
+	title={"training\nmontage"}
+	expo="I'm Jeff Caldwell, a computer science student who loves web development and JavaScript. I write about the things I'm learning here.">
 	<h2>On the web</h2>
 	<p>twitter: <a href="https://twitter.com/trainingm0ntage" class="text-blue-300">@trainingm0ntage</a></p>
 	<p>LinkedIn: <a href="https://www.linkedin.com/in/jeff-caldwell-4424181a" class="text-blue-300">Jeff Caldwell</a></p>
@@ -51,15 +51,30 @@
 
 <style>
 	:global(.post-section > * + *) {
-		@apply mt-16;
+		@apply
+			xl:mt-16
+			lg:mt-12
+			md:mt-8
+			sm:mt-8
+			mt-8
+			;
 	}
 
 	.sidebar-tweets {
 		@apply
-			mt-24;
+			xl:mt-24
+			lg:mt-16
+			md:mt-12
+			sm:mt-12
+			mt-12
+			;
 	}
 	:global(.sidebar-tweets > * + *) {
 		@apply
-			mt-12;
+			xl:mt-12
+			lg:mt-12
+			md:mt-8
+			sm:mt-8
+			mt-8;
 	}
 </style>
