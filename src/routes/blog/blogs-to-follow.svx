@@ -1,0 +1,44 @@
+---
+title: Blogs to Follow
+subtitle: A living collection of blogs and email lists I find useful.
+author: Jeff Caldwell
+date: "Wednesday, December 3, 2020"
+description: If you're pursuing web-dev, it's a good idea to read-up on developments, techniques, and other funn stuff people are working on.
+layout: blog
+tags: ['post', 'dev', 'webdev', 'design', 'blogs']
+---
+
+This will be a running list of blogs I find useful.
+## Blogs
+
+[Ahmed Shaheed](https://ishadeed.com/)
+
+[Kent C. Dodds](https://kentcdodds.com/blog)
+
+[Dan Abramov](https://overreacted.io/)
+
+[Josh W. Comeau](https://www.joshwcomeau.com/)
+
+[Amelia Wattenberger](https://wattenberger.com/)
+
+[Alex Lakatos](https://alexlakatos.com/)
+
+[Greg Wolanski](https://gregwolanski.com/)
+
+[DevDojo](https://devdojo.com/)
+
+[DEV.to list of blogs and lists to follow](https://dev.to/thomlom/what-are-your-favorite-web-development-blogs-e6i)
+
+## Email lists
+
+[Better Dev Link](https://betterdev.link/)
+
+[Daily Dev Links](https://dailydevlinks.com/)
+
+[JavaScript Kicks](https://javascriptkicks.com/)
+
+## Especially useful posts
+
+[Building your color palette](https://refactoringui.com/previews/building-your-color-palette/)
+
+[Practical guide for learning frontend development for beginners](https://www.freecodecamp.org/news/a-practical-guide-to-learning-front-end-development-for-beginners-da6516505e41/)

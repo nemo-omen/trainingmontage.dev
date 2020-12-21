@@ -1,0 +1,7 @@
+---
+layout: default
+title: about
+expo: I'm constantly learning and writing about web development and I'm always working on something.
+---
+
+This is going to be a simple page for me to describe what I like and what I'm good at. Hopefully I'll get a few projects to put up soon.

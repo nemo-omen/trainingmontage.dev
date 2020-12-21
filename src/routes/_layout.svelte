@@ -24,7 +24,9 @@
 	</title>
 </svelte:head>
 <section id="app">
-	<slot />
+	<div class="app-wrapper">
+		<slot />
+	</div>
 </section>
 
 <style>

@@ -18,10 +18,13 @@ devDependencies:
   eslint-config-airbnb-base: 14.2.1_00d09b02c6185f3347dd86516a55f6ae
   eslint-plugin-import: 2.22.1_eslint@7.15.0
   eslint-plugin-svelte3: 2.7.3_eslint@7.15.0+svelte@3.31.0
+  gray-matter: 4.0.2
   kleur: 4.1.3
   mdsvex: 0.8.9_svelte@3.31.0
   postcss: 8.2.1
   postcss-import: 13.0.0_postcss@8.2.1
+  prism-svelte: 0.4.7
+  prismjs: 1.22.0
   rollup: 2.35.1
   rollup-plugin-svelte: 7.0.0_rollup@2.35.1+svelte@3.31.0
   rollup-plugin-terser: 7.0.2_rollup@2.35.1
@@ -2182,6 +2185,14 @@ packages:
       node: '>= 0.10.0'
     resolution:
       integrity: sha512-mHJ9O79RqluphRrcw2X/GTh3k9tVv8YcoyY4Kkh4WDMUYKRZUq0h1o0w2rrrxBqM7VoeUVqgb27xlEMXTnYt4g==
+  /extend-shallow/2.0.1:
+    dependencies:
+      is-extendable: 0.1.1
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-Ua99YUrZqfYQ6huvu5idaxxWiQ8=
   /fast-deep-equal/3.1.3:
     dev: true
     resolution:
@@ -2340,6 +2351,17 @@ packages:
     dev: true
     resolution:
       integrity: sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
+  /gray-matter/4.0.2:
+    dependencies:
+      js-yaml: 3.14.1
+      kind-of: 6.0.3
+      section-matter: 1.0.0
+      strip-bom-string: 1.0.0
+    dev: true
+    engines:
+      node: '>=6.0'
+    resolution:
+      integrity: sha512-7hB/+LxrOjq/dd8APlK0r24uL/67w7SkYnfwhNFwg/VDIGWGmduTDYf3WNstLW2fbbmRwrDGCVSJ2isuf2+4Hw==
   /has-flag/3.0.0:
     dev: true
     engines:
@@ -2553,6 +2575,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-YTObbyR1/Hcv2cnYP1yFddwVSuE=
+  /is-extendable/0.1.1:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-YrEQ4omkcUGOPsNqYX1HLjAd/Ik=
   /is-extglob/2.1.1:
     dev: true
     engines:
@@ -2707,6 +2735,12 @@ packages:
       graceful-fs: 4.2.4
     resolution:
       integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==
+  /kind-of/6.0.3:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
   /kleur/4.1.3:
     dev: true
     engines:
@@ -3549,6 +3583,10 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha1-t+PqQkNaTJsnWdmeDyAesZWALuE=
+  /prism-svelte/0.4.7:
+    dev: true
+    resolution:
+      integrity: sha512-yABh19CYbM24V7aS7TuPYRNMqthxwbvx6FF/Rw920YbyBWO3tnyPIqRMgHuSVsLmuHkkBS1Akyof463FVdkeDQ==
   /prismjs/1.22.0:
     dev: true
     optionalDependencies:
@@ -3821,6 +3859,15 @@ packages:
     dev: true
     resolution:
       integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
+  /section-matter/1.0.0:
+    dependencies:
+      extend-shallow: 2.0.1
+      kind-of: 6.0.3
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==
   /select/1.1.2:
     dev: true
     optional: true
@@ -4039,6 +4086,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-AuvKTrTfQNYNIctbR1K/YGTR1756GycPsg7b9bdV9Duqur4gv6aKqHXah67Z8ImS7WEz5QVcOtlfW2rZEugt6w==
+  /strip-bom-string/1.0.0:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-5SEekiQ2n7uB1jOi8ABE3IztrZI=
   /strip-bom/3.0.0:
     dev: true
     engines:
@@ -4473,10 +4526,13 @@ specifiers:
   eslint-plugin-import: ^2.22.1
   eslint-plugin-svelte3: ^2.7.3
   express: ^4.17.1
+  gray-matter: ^4.0.2
   kleur: ^4.1.3
   mdsvex: ^0.8.9
   postcss: ^8.2.1
   postcss-import: ^13.0.0
+  prism-svelte: ^0.4.7
+  prismjs: ^1.22.0
   rollup: ^2.34.2
   rollup-plugin-svelte: ^7.0.0
   rollup-plugin-terser: ^7.0.2

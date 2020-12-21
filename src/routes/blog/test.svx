@@ -1,0 +1,28 @@
+---
+title: Mdsvex Test
+description: We like descriptions of blog posts because it gives us a chance to lure the reader in with the promise of a solution to their problems.
+date: Friday, December 18, 2020
+author: Jeff Caldwell
+layout: blog
+---
+
+## Hey! This is my mdsvex component!
+
+Now this is some content, just because we need to have some content here.
+
+Now comes the fun part, where we either port this layout over to the personal blog project or recreate the functionality of the personal blog here. 
+
+_Or_
+
+We recreate all of it using a different build system like Snowpack.
+
+Either way, I'm liking the look of the typography here. Lots of whitespace and the text is nice and readable. Let's add a code block and see what's what.
+
+```js
+const myName = 'Jeff Caldwell';
+let currentpursuits = ['Learning JavaScript', 'Studying Computer Science', 'Writing', 'Making Websites'];
+
+async function doSomething(thing) {
+    console.log(thing);
+} 
+```

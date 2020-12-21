@@ -6,6 +6,7 @@
 
 @import "tailwindcss/utilities";
 /* @import "./utilities.pcss"; */
+
 @layer base {
     html, body {
         margin: 0;
@@ -16,10 +17,23 @@
     #app {
 		@apply
 			bg-gray-200;
-		display: grid;
-		grid-template-areas:
-			"sidebar main";
-		grid-template-columns: 1fr 3fr;
+        overflow: hidden;
+    }
+    #app > * {
+        display: flex;
+        flex-wrap: wrap;
+        margin: calc(3rem / 2 * -1);
+    }
+
+    #app > * > * {
+        margin: calc(3rem / 2);
+        flex-basis: 33%;
+        flex-grow: 1;
+    }
+    #app > * > :last-child {
+        flex-basis: 0;
+        flex-grow: 999;
+        min-width: calc(60% - 3rem);
     }
     h1, h2, h3, h4 {
         font-family: 'Oswald', sans-serif;
@@ -39,28 +53,14 @@
     p {
         @apply mt-4 leading-relaxed text-xl;
     }
-    .sidebar {
-        width: 25vw;
-        @apply
-            min-h-screen
-            bg-gray-700
-            text-gray-200
-            fixed;
-    }
-    .sidebar-body > * + * {
-        @apply mt-12;
-    }
-    .sidebar-body {
-        @apply
-            p-12;
-    }
-    .sidebar-body h1 {
-        @apply
-            text-6xl;
-    }
     main {
-        grid-column-start: 2;
-        width: 60%;
-        @apply p-12 min-h-screen;
+        @apply p-24 min-h-screen;
+    }
+    a {
+        @apply
+            text-blue-500
+            hover:text-blue-600
+            transition-colors
+            duration-300;
     }
 }

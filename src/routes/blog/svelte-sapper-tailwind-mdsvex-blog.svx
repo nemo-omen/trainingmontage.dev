@@ -1,0 +1,369 @@
+---
+title: 'Blogging with Sapper, Tailwind, and mdsvex: Part 1'
+subtitle: How I made this very blog.
+author: Jeff Caldwell
+description: How I made this site using Svelte/Sapper, TailwindCss, and mdsvex 
+tags: ['Svelte', 'Sapper', 'TailwindCss', 'mdsvex', 'Blog', 'Markdown', 'JavaScript', 'CSS', 'Tutorial', 'Web Development', 'pnpm']
+date: Tuesday, December 15, 2020
+layout: blog
+---
+
+Learning frontend web-development can be pretty tough. Aside from the months you have to spend learning all of the basics of CSS, HTML, and JavaScript, you have to contend with a myriad of available frameworks, build tools, hosting, and on, and on. So it's nice when people make libraries and tools to make that process easier.
+
+[Svelte](https://svelte.dev/), and the framework built on top of it, [Sapper](https://sapper.svelte.dev/), along with [TailwindCss](https://tailwindcss.com/) and [mdsvex](https://mdsvex.pngwn.io/) make the task of creating a markdown blog much easier, though there are still plenty of ways it can go wrong. So, let's walk through the process I went through to set this site up. Along the way I'll write about why I made the decisions I did, the mistakes I made, and how I got around them.
+
+With any luck we'll both learn something.
+
+### But first...
+
+Before I start writing about this, let me just say that I know [SvelteKit](https://svelte.dev/blog/whats-the-deal-with-sveltekit) is on the way and will most likely make Sapper obsolete. Still, Rich Harris has said that the Svelte contributors are taking pains to make the transition from Sapper to SvelteKit pretty painless. I think this means that learning to use Sapper will transfer over to SvelteKit (as a matter of fact, I've tried some of the techniques I'll go over using SvelteKit, so, with some minor changes in syntax, a lot of this should still apply.)
+
+## Getting Started
+
+Generally, getting started with a Svelte or Sapper app entails cloning one of their templates using [Degit](https://www.npmjs.com/package/degit), which essentially clones a git repository and removes the `.git` directory. We're not going to copy the official [sveltejs/sapper template](https://github.com/sveltejs/sapper-template) for this project, though. Why? Because the process of getting Tailwind, Sapper and mdsvex working together in a way that ensures all the features of each library play well together is a real pain in the butt and someone else has done a fantastic job of figuring it out.
+
+What we're going to start with is Jacob Babich's fantastic [sapper-postcss-template](https://github.com/babichjacob/sapper-postcss-template). There are other ways to integrate Tailwind with Svelte, some of them are really simple to set up, but they didn't work with the way I've been using Tailwind (which I'll leave for another discussion). For now, let's just grab the template and get going.
+
+```bash
+npx degit babichjacob/sapper-postcss-template#main my-blog
+```
+
+What this command does is grab whatever repo you provide as the first argument, in this case `babichjacob/sapper-postcss-template`, and copy it into whatever directory you provide as the second argument — `my-blog` (or whatever you want to name the directory). If the template lives in a different branch than `master`, as many Github repos have started to do this year, you'll need to append the branch name with a hash — `#main` for this repo. If you wanted to you could also create a directory first, `cd` into the _empty_ directory and use 
+
+```bash
+npx degit babichjacob/sapper-postcss-template#main .
+```
+
+So, now we have a directory full of Jacob Babich's template files. Let's take a look at what's in there.
+
+<img src="img/posts/12-15-20/12-15-20_Screenshot01.png" alt="my-blog directory structure" loading="lazy" class="small-img" width="225" height="450">
+
+Mostly the template is the base Sapper template with some additional files that work to integrate Sapper with PostCss and Tailwind. Let's spin this sucker up and see what's what, shall we?
+
+First, we need to install all of the dependencies. [pnpm](https://pnpm.js.org/en/) is an alternative to npm that helps save disk space by keeping all of your dependencies on a _content-addressable filesystem_ on your hard drive. It then links to packages in that filesystem from the `node_modules` directory in your project. This way, if you already have a dependency installed from another project, you don't have to take up more disk space by installing it again. [It's pretty cool](https://pnpm.js.org/en/motivation)!
+
+If you want to use pnpm and don't have it installed yet, you can go ahead and install it with
+
+```bash
+npm install -g pnpm
+```
+
+If you don't want to use it, you can just follow along using `npm` in place of `pnpm` for any of the commands.
+
+Okay, back to the project. Install the dependencies.
+
+```bash
+pnpm install
+```
+
+Now let's get the dev-server running.
+
+```bash
+pnpm run dev
+```
+Which will do a bunch of fun stuff in your terminal.
+
+<img src="img/posts/12-15-20/12-15-20_Screenshot02.png" alt="Terminal output of pnpm run dev command" loading="lazy" width="800" height="450">
+
+If you open your browser to [http://localhost:3000](http://localhost:3000) you'll see the sapper template in all its glory
+
+<img src="img/posts/12-15-20/12-15-20_Screenshot03.png" alt="Heeey! It's Sapper with Tailwind!" loading="lazy" width="800" height="450">
+
+## Getting Comfortable
+
+Now that we have the base template up and running. Let's take a look at some of the files that make it work. Open up `svelte.config.js`, located in the root of your project's directory.
+
+```js
+//svelte.config.js
+
+const sveltePreprocess = require("svelte-preprocess");
+const postcss = require("./postcss.config");
+
+const createPreprocessors = ({ sourceMap }) => [
+	sveltePreprocess({
+		sourceMap,
+		defaults: {
+			style: "postcss",
+		},
+		postcss,
+	}),
+	// You could have more preprocessors, like mdsvex
+];
+
+module.exports = {
+	createPreprocessors,
+	// Options for `svelte-check` and the VS Code extension
+	preprocess: createPreprocessors({ sourceMap: true }),
+};
+```
+
+Normally, this stuff would be in `rollup.config.js`, but it's been separated into its own module here. This is where we'll add mdsvex later. For now, just know that this is where we'll be setting up any preprocessors. This file requires `postcss.config.js`, so let's take a look at that file next.
+
+```js
+//postcss.config.js
+
+const cssnano = require("cssnano");
+const postcssImport = require("postcss-import");
+const tailwindcss = require("tailwindcss");
+const tailwindcssConfig = require("./tailwind.config");
+
+const mode = process.env.NODE_ENV;
+const dev = mode === "development";
+
+module.exports = {
+	plugins: [
+		postcssImport,
+
+		tailwindcss(tailwindcssConfig),
+
+		// Plugins for polyfills and the like (such as postcss-preset-env) should generally go here
+		// but a few have to run *before* Tailwind
+
+		!dev && cssnano({
+			preset: [
+				"default",
+				{ discardComments: { removeAll: true } },
+			],
+		}),
+	].filter(Boolean),
+};
+
+```
+
+This is where we start getting into the nitty-gritty of making PostCss and Tailwind work with Svelte. If you have PostCss plugins to add, this is the place to do that. Let's look at the other important config file that this file imports, `tailwind.config.js`
+
+```js
+// tailwind.config.js
+
+const { tailwindExtractor } = require("tailwindcss/lib/lib/purgeUnusedStyles");
+
+module.exports = {
+	purge: {
+		content: [
+			"./src/**/*.html",
+			"./src/**/*.svelte",
+		],
+		options: {
+			defaultExtractor: (content) => [
+				// This is an internal Tailwind function that we're not supposed to be allowed to use
+				// So if this stops working, please open an issue at
+				// https://github.com/babichjacob/sapper-postcss-template/issues
+				// rather than bothering Tailwind Labs about it
+				...tailwindExtractor(content),
+				// Match Svelte class: directives (https://github.com/tailwindlabs/tailwindcss/discussions/1731)
+				...[...content.matchAll(/(?:class:)*([\w\d-/:%.]+)/gm)].map(([_match, group, ..._rest]) => group),
+			],
+			keyframes: true,
+		},
+	},
+	theme: {
+		extend: {},
+	},
+	variants: {
+		extend: {},
+	},
+	plugins: [],
+};
+
+```
+
+For the most part, this file is exactly the same as the default `tailwind.config.js` that comes when you initialize a new Tailwind project, with one big exception: `defaultExtractor`. This is a custom function for matching against Svelte [class](https://svelte.dev/docs#class_name) directives. This function is part of the reason this template is so awesome. Don't mess with that function if you don't know what you're doing! Otherwise, this is where you'll customize your tailwind configuration.
+
+Okay, so those are the config files. There are two last files of note that we should take a look at. The first is `src/global.pcss`, which is the file that imports all of Tailwind's components and compiled css:
+
+```css
+@import "tailwindcss/base";
+/* @import "./base.pcss"; */
+
+@import "tailwindcss/components";
+/* @import "./components.pcss"; */
+
+@import "tailwindcss/utilities";
+/* @import "./utilities.pcss"; */
+
+```
+You can add global styles to this file by adding:
+
+```css
+@layer base {
+    // your expert-level css here
+}
+```
+
+Lastly, let's look at the file that gets compiled by this fantastic Rube Goldberg Machine of config files, `static/global.css`. I'm not going to show you the code here because the file is more than 3MB. This is basically everything that makes Tailwind work while you're in development. When you eventually build for production this will be whittled down to some small number of kilobytes. What you should remember here is __don't edit this file or add your own styles to it__. It will all be overwritten.
+
+Okay, enough looking at all of these config files. Let's actually make a blog!
+
+## Adding mdsvex
+
+[mdsvex](https://mdsvex.pngwn.io/) is a project by [pngwn](https://twitter.com/evilpingwin) that aims to introduce some of the functionality of [mdx](https://mdxjs.com/) to Svelte. Basically, mdsvex, allows you to write Svelte template code and some js in your markdown files. This is super-ideal for a blog made with Svelte/Sapper because you never really know when you'll want to execute some real code in your markdown posts.
+
+Let's install it and start playing around, shall we?
+
+```bash
+pnpm install mdsvex -D
+```
+
+We're installing `mdsvex` as a dev dependency here because we want this blog to be served as a static site. Later, when we export the static site from Sapper or use Netlify's automated build process, those dev dependencies are what will be used in the build process.
+
+Once that's installed, we need to add it to our preprocessors over in `svelte/config.js` open that up again and we'll import `mdsvex`:
+
+```diff
+//svelte.config.js
+
+const sveltePreprocess = require("svelte-preprocess");
+const postcss = require("./postcss.config");
++ const { mdsvex } = require('mdsvex');
+
+
+const createPreprocessors = ({ sourceMap }) => [
++   mdsvex({}),
+
+	sveltePreprocess({
+		sourceMap,
+		defaults: {
+			style: "postcss",
+		},
+		postcss,
+	}),
+	// You could have more preprocessors, like mdsvex
+];
+
+module.exports = {
+	createPreprocessors,
+	// Options for `svelte-check` and the VS Code extension
+	preprocess: createPreprocessors({ sourceMap: true }),
+};
+
+```
+
+It's important to add `mdsvex({})` _above_ `sveltePreprocess` here. My first mistake when building this blog was to place `mdsvex({})` right after the comment `//you could have more preprocessors, like mdsvex`. I'm guessing this didn't work because `sveltePreprocess` works on `.svelte` files, while mdsvex actually builds `.svelte` files from markdown, metadata, and abstract syntax trees through remark. Basically, if you try to hand `sveltePreprocess` a bunch of markdown it will tell you, cryptically, that it can't do what you want. 
+
+mdsvex, by default, works with the `.svx` file extension. We'll get to writing actual `.svx` files in a bit. First, let's look at a feature of mdsvex: layouts.
+
+First, add the following to `svelte.config.js`:
+
+```diff
+//svelte.config.js
+
+const sveltePreprocess = require("svelte-preprocess");
+const postcss = require("./postcss.config");
+const { mdsvex } = require('mdsvex');
++ const path = require('path');
+
+const createPreprocessors = ({ sourceMap }) => [
+   mdsvex({
++   layout: {
++       blog: path.resolve(__dirname, 'src/layouts/blog.svelte'),
++       default: path.resolve(__dirname, 'src/layouts/default.svelte'),
+    }
+
+...
+```
+
+We're specifying two layout files here, one for the blog posts, and one as our default layout. We could just specify the single layout for blog posts if we wanted, but I wanted to highlight that we can specify multiple layouts for our `.svx` files. It's important to note here that any layout files you specify in this config _need to exist at the location you specify_ or you'll get an ugly error.
+
+Now, let's create the layout files in the directory we specified. Create a directory at `src/layouts`. Then create two files: `src/layouts/blog.svelte` and `src/layouts/default.svelte`.
+
+Then, we'll just put the same code in both for now so we don't run into any compile-time errors.
+
+```svelte
+<script>
+    //script stuff will go here
+</script>
+
+<slot>
+    <!-- your mdsvex content will load here -->
+</slot>
+
+<style>
+    /* style stuff will go here */
+</style>
+```
+
+Okay, we have layout files. The next step is to add our `svx` files to make sure everything works the way we expect it to.
+
+In your `src/routes` directory, create a subdirectory named `mdsvex`. In that directory create a file called `index.svx` and put the following in that file:
+
+```markdown
+---
+layout: blog
+title: mdsvex test
+greeting: Hello, Sapper, Tailwind, and mdsvex!
+
+---
+
+## {title}
+
+## Hey! This is my mdsvex component!
+
+Now this is some content, just because we need to have some content here.
+```
+
+mdsvex allows us to use `.svx` files in place of `.svelte` files in our routes and components. So, what we're doing here is setting up a test route so we can make sure everything's wired up correctly. Because Sapper uses file-based routing, and once we're finished with the next step, this file will be available at [http://localhost:3000/mdsvex](http://localhost:3000/mdsvex).
+
+Okay, there are two small things that we need to take care of to make sure this will run. First, we need to edit `package.json` and modify our `dev` script with an `--ext` argument, telling the sapper command that we want it to look for both `.svx` and `.svelte` files. Just replace the entire `"dev": "sapper dev",` line with:
+
+```json
+"dev": "sapper dev --ext '.svelte .svx'",
+```
+
+We also need to tell `rollup-plugin-svelte` to look for those extensions. Sapper has configurations for both the client and the server, so we need to make sure the code is in both configuration objects. Open up `rollup.config.json` and add `extensions: ['.svx', '.svelte'],` to the svelte plugin config of __both__ the `client` and `server` sections of that config file:
+
+```js
+client: {
+    plugins: [
+			// blahblahblah config stuff
+			svelte({
+                extensions: ['.svx', '.svelte'],
+            // blahblahblah more config stuff
+server: {
+    plugins: [
+			// blahblahblah config stuff
+			svelte({
+                extensions: ['.svx', '.svelte'],
+            // blahblahblah more config stuff
+```
+
+Finally! You should be able to run the whole thing with `pnpm run dev`.
+
+Do that and navigate to [http://localhost/mdsvex](http://localhost/mdsvex) to see the glory of what you've been working so hard on.
+
+<img src="img/posts/12-15-20/12-15-20_Screenshot04.png" alt="Behold! Your mdsvex component in action!" loading="lazy" width="800" height="450">
+
+Okay, so it's ugly. But, hey, it works! Let's add some stuff to the `blog.svelte` layout file so we can check out how variables in the `.svx` frontmatter can be used by the `.svelte` file. Just replace everything in blog.svelte with the following:
+
+```svelte
+<script>
+    export let greeting;
+</script>
+
+<main>
+    <h1>{greeting}</h1>
+    <slot></slot>
+</main>
+
+<style>
+	main {
+		width: 50%;
+		margin: 3rem auto;
+	}
+	:global(h1) {
+		@apply text-3xl font-black text-red-500;
+	}
+	:global(h2) {
+		@apply text-2xl font-bold mt-12;
+	}
+	:global(h3) {
+		@apply text-xl font-bold mt-8;
+	}
+	:global(p) {
+		@apply mt-4 leading-normal;
+	}
+</style>
+```
+<img src="img/posts/12-15-20/12-15-20_Screenshot05.png" alt="Very stylish version of an mdsvex component" loading="lazy" width="800" height="450">
+
+Okay, now you can see that `greeting`, defined in the frontmatter of `index.svx` can be used as a prop in the `blog.svelte` layout file. We can also use the frontmatter properties in the `.svx` file itself. We can also use Tailwind's `@apply` syntax to, well, apply Tailwind class styles to the markdown content that's added to our layout component. There's a _lot_ more you can do with mdsvex, and we'll get into some of it in the next part.
+
+That's enough for one tutorial. We'll learn how to set up what we've got so that we can create a blog with all of these cool libraries in the next part.

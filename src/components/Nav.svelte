@@ -2,16 +2,18 @@
     import {onMount} from 'svelte';
     import {stores} from '@sapper/app';
     const {page} = stores();
+    const splitPage = $page.path.split('/');
 
     onMount(() => {
         console.log('$page', $page);
+        console.log(splitPage);
     });
 </script>
 
 <nav>
     <a href="/" rel="prefetch" class="{$page.path === '/' ? 'active' : 'normal'}">home</a>
-    <a href="/mdsvex" rel="prefetch" class="{$page.path === '/mdsvex' ? 'active' : 'normal'}">mdsvex</a>
-    <a href="/twitter" rel="prefetch" class="{$page.path === '/twitter' ? 'active' : 'normal'}">twitter</a>
+    <a href="/blog" rel="prefetch" class="{$page.path === '/blog' || splitPage[1] === 'blog' ? 'active' : 'normal'}">blog</a>
+    <a href="/about" rel="prefetch" class="{$page.path === '/about' ? 'active' : 'normal'}">about</a>
 </nav>
 
 <style>
