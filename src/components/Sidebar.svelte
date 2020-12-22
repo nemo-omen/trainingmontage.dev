@@ -1,8 +1,7 @@
 <script>
-    import { stores } from '@sapper/app';
-    import Nav from './Nav.svelte'
+    import Nav from './Nav.svelte';
+    import TOC from './TOC.svelte';
 
-    const { page } = stores();
     export let title;
     export let meta = undefined;
     export let expo = '';
@@ -27,15 +26,8 @@
             <section class="extra">
                 <slot/>
                 {#if tocList !== undefined}
-                <section class="table-of-contents">
-                    <h4 class="toc-heading">Table of Contents</h4>
-                    <ul class="toc-list">
-                        {#each tocList as tocItem}
-                        <li class="toc-item" style="padding-left: {tocItem.level > 2 ? (tocItem.level / 2) * 0.5 : 0}rem"><a href="{$page.path}#{tocItem.id}">{tocItem.title}</a></li>
-                        {/each}
-                    </ul>
-                </section>
-                    {/if}
+                    <TOC {tocList}/>
+                {/if}
             </section>
         </section>
 </aside>
@@ -60,26 +52,6 @@
         font-size: 2.875rem;
         font-weight: 600;
         line-height: 1.375;
-    }
-    .table-of-contents {
-        padding: 2rem 0 0 0;
-        margin: 0 auto;
-    }
-    .toc-heading {
-        font-size: 1.875rem;
-        font-weight: 500;
-    }
-    .toc-list {
-        padding: 1rem 2rem 0 0;
-        margin: 0;
-    }
-    .toc-item {
-        list-style-type: none;
-        margin: 0;
-        padding: 0.25rem 0 0 0;
-        font-size: 1.5rem;
-        font-family: var(--sans);
-        font-weight: 400;
     }
     .meta {
         margin-top: 1.5rem;
