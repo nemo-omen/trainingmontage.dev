@@ -36,7 +36,7 @@
         <Nav/>
         <section class="sidebar-body">
             <hgroup>
-                <h1 class="heading-xl">{title}</h1>
+                <h1 class="heading-xl" id="top">{title}</h1>
                 {#if meta !== undefined}
                     <section class="meta">
                         <p>{meta.author}</p>

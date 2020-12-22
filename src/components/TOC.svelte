@@ -8,6 +8,7 @@
 <section class="table-of-contents">
     <h4 class="toc-heading">Table of Contents</h4>
     <ul class="toc-list">
+        <li class="toc-item"><a href="{$page.path}#top">Top</a></li>
         {#each tocList as tocItem}
         <li class="toc-item" style="padding-left: {tocItem.level > 2 ? (tocItem.level / 2) * 0.5 : 0}rem"><a href="{$page.path}#{tocItem.id}">{tocItem.title}</a></li>
         {/each}
