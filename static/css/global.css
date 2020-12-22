@@ -56,12 +56,13 @@ a {
     text-decoration: underline;
     text-decoration-style: solid;
     text-decoration-thickness: 1px;
-    transition-property: color;
+    transition-property: all;
     transition-duration: 300ms;
 }
 
 a:hover {
     color: var(--dark-blue);
+    text-decoration-style: dotted;
 }
 
 p {
