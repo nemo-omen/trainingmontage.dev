@@ -21,7 +21,7 @@
 </Sidebar>
 
 <main>
-    <section class="posts">
+    <section class="post-section">
         {#each posts as post}
             <PostItem {post}/>
         {/each}
@@ -29,8 +29,5 @@
 </main>
 
 <style>
-:global(.posts > * + *) {
-    @apply 
-        mt-16;
-}
+
 </style>

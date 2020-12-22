@@ -9,7 +9,7 @@
         <Nav/>
         <section class="sidebar-body">
             <hgroup>
-                <h1>{title}</h1>
+                <h1 class="heading-xl">{title}</h1>
                 {#if meta !== undefined}
                     <section class="meta">
                         <p>{meta.author}</p>
@@ -26,93 +26,82 @@
         </section>
 </aside>
 <style>
-.sidebar {
-    @apply
-        bg-gray-800
-        text-gray-200
-        ;
-}
-
-.sidebar-body {
-    @apply
-        xl:p-12
-        lg:p-12
-        md:p-8
-        sm:p-8
-        p-8;
-}
-
-.sidebar-body p {
-    @apply
-        xl:text-xl
-        lg:text-xl
-        md:text-base
-        sm:text-base
-        text-base
-        leading-relaxed;
-}
-.sidebar-body > * + * {
-    @apply
-        xl:mt-24
-        lg:mt-16
-        md:mt-12
-        sm:mt-8
-        mt-8
-        ;
-}
-
-.sidebar-body hgroup h1 {
-    @apply
-        xl:text-6xl
-        lg:text-5xl
-        md:text-4xl
-        sm:text-3xl
-        text-3xl
-        font-semibold;
-    line-height: 1.3 !important;
-}
-
-.meta {
-    @apply
-    text-blue-300
-    mt-6;
-}
-.meta p {
-    @apply
-        text-base;
-    line-height: 1 !important;
-}
-.meta p + * {
-    @apply
-        mt-2;
-}
-.expo {
-    @apply
-        italic;
-}
-
-:global(.extra h2) {
-    @apply
-        xl:text-3xl
-        lg:text-2xl
-        md:text-xl
-        sm:text-xl
-        text-xl;
-}
-:global(.extra > h2 + *) {
-    @apply
-        mt-4;
-}
-:global(.extra p) {
-    @apply
-        xl:text-xl
-        lg:text-xl
-        md:text-lg
-        sm:text-base
-        text-base;
-}
-:global(.extra > p + p) {
-    @apply
-        mt-2;
-}
+    .sidebar {
+        background-color: var(--dark-gray);
+        color: var(--light-gray);
+    }
+    :global(.sidebar a) {
+        color: var(--light-blue);
+    }
+    :global(.sidebar a:hover) {
+        color: var(--blue);
+    }
+    .sidebar-body {
+        padding: 1rem;
+    }
+    .sidebar-body > * + * {
+        margin-top: 2rem;
+    }
+    .heading-xl {
+        font-size: 2.875rem;
+        font-weight: 600;
+        line-height: 1.375;
+    }
+    .meta {
+        margin-top: 1.5rem;
+        color: var(--light-blue);
+    }
+    .meta p {
+        line-height: 1;
+    }
+    .meta p + * {
+        margin-top: 0.5rem;
+    }
+    .expo {
+        font-style: italic;
+    }
+    @media (min-width: 600px) {
+        .heading-xl {
+            font-size: 3.25rem;
+        }
+        .sidebar-body {
+            padding: 2rem;
+        }
+        .sidebar-body > * + * {
+            margin-top: 2.25rem;
+        }
+    }
+    @media (min-width: 768px) {
+        .heading-xl {
+            font-size: 3.5rem;
+        }
+        .sidebar-body {
+            padding: 2.5rem;
+        }
+        .sidebar-body > * + * {
+            margin-top: 2.5rem;
+        }
+    }
+    @media (min-width: 1024px) {
+        .heading-xl {
+            font-size: 3.75rem;
+        }
+        .sidebar-body {
+            padding: 2.75rem;
+        }
+        .sidebar-body > * + * {
+            margin-top: 2.75rem;
+        }
+    }
+    @media (min-width: 1280px) {
+        .heading-xl {
+            font-size: 3.75rem;
+        }
+        .sidebar-body {
+            padding: 3rem;
+        }
+        .sidebar-body > * + * {
+            margin-top: 3rem;
+        }
+    }
 </style>

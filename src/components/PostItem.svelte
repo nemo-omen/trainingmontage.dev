@@ -20,17 +20,15 @@
 
 <style>
     .post-item-title {
-        @apply
-            tracking-wide
-            m-0
-            font-medium;
+        letter-spacing: 0.025rem;
+        margin: 0;
+        font-weight: 500;
     }
     .post-item-meta {
-        @apply
-            mt-2
-            text-gray-700
-            text-base
-            font-normal
-            font-serif;
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        color: var(--dark-gray);
+        font-weight: 400;
+        font-family: var(--serif);
     }
 </style>

@@ -36,8 +36,14 @@
 </article>
 
     <style>
+        header {
+            margin: 0;
+            padding: 0;
+        }
         p {
-            @apply
-                text-base;
+            margin: 0;
+        }
+        .tweet-body {
+            margin-top: 0.5rem;
         }
     </style>

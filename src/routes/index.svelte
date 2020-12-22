@@ -21,20 +21,22 @@
 <Sidebar
 	title={"training\nmontage"}
 	expo="I'm Jeff Caldwell, a computer science student who loves web development and JavaScript. I write about the things I'm learning here.">
-	<h2>On the web</h2>
-	<p>twitter: <a href="https://twitter.com/trainingm0ntage" class="text-blue-300">@trainingm0ntage</a></p>
-	<p>LinkedIn: <a href="https://www.linkedin.com/in/jeff-caldwell-4424181a" class="text-blue-300">Jeff Caldwell</a></p>
+	<section class="contact-info">
+		<h2>On the web</h2>
+		<p>twitter: <a href="https://twitter.com/trainingm0ntage" class="text-blue-300">@trainingm0ntage</a></p>
+		<p>LinkedIn: <a href="https://www.linkedin.com/in/jeff-caldwell-4424181a" class="text-blue-300">Jeff Caldwell</a></p>
+	</section>
 </Sidebar>
 <main>
 	<section class="post-section">
-			<h2 class="mt-0">
+			<h2>
 				Latest from the <a href="/blog" rel="prefetch">blog</a>
 			</h2>
 		{#each posts as post}
 			<PostItem {post} />
 		{/each}
 	</section>
-	<section class="sidebar-tweets">
+	<section class="tweets-section">
 		<h2>
 			Latest from <a href="https://twitter.com/trainingm0ntage">Twitter</a>
 		</h2>
@@ -45,31 +47,10 @@
 </main>
 
 <style>
-	:global(.post-section > * + *) {
-		@apply
-			xl:mt-16
-			lg:mt-12
-			md:mt-8
-			sm:mt-8
-			mt-8
-			;
+	.contact-info h2 {
+		margin-bottom: 0.5rem;
 	}
-
-	.sidebar-tweets {
-		@apply
-			xl:mt-24
-			lg:mt-16
-			md:mt-12
-			sm:mt-12
-			mt-12
-			;
-	}
-	:global(.sidebar-tweets > * + *) {
-		@apply
-			xl:mt-12
-			lg:mt-12
-			md:mt-8
-			sm:mt-8
-			mt-8;
+	.contact-info p {
+		line-height: 1.2;
 	}
 </style>

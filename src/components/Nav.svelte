@@ -18,33 +18,46 @@
 
 <style>
     nav {
-        @apply
-            flex
-            flex-row
-            xl:px-12
-            lg:px-12
-            md:px-8
-            sm:px-8
-            px-8
-            ;
+        display: flex;
+        flex-direction: row;
+        font-family: var(--sans);
+        padding: 0 1rem;
     }
     nav a {
-        @apply
-            block
-            transition-all
-            duration-300
-            px-2
-            py-4
-            text-gray-100;
+        display: block;
+        padding: 1rem 0.5rem;
+        color: var(--light-gray);
+        transition-property: all;
+        transition-duration: 300ms;
+        text-decoration: none;
     }
     nav a:hover {
-        @apply
-            bg-gray-300
-            text-gray-900;
+        background: var(--light-gray);
+        color: var(--dark-gray);
     }
     .active {
-        @apply
-            bg-gray-300
-            text-gray-900;
+        background: var(--light-gray);
+        color: var(--dark-gray);
+    }
+
+    @media (min-width: 600px) {
+        nav {
+            padding: 0 2rem;
+        }
+    }
+    @media (min-width: 768px) {
+        nav {
+            padding: 0 2.5rem;
+        }
+    }
+    @media (min-width: 1024px) {
+        nav {
+            padding: 0 2.75rem;
+        }
+    }
+    @media (min-width: 1280px) {
+        nav {
+            padding: 0 3rem;
+        }
     }
 </style>
