@@ -45,21 +45,29 @@
         tocList={headings}
     />
 <main>
-    <section class="post-section" bind:this={postSection}>
+    <section class="blog-section" bind:this={postSection}>
             <slot></slot>
     </section>
 </main>
 
 <style>
+    :global(.blog-section p) {
+        margin-bottom: 3rem;
+    }
 :global(code:not(pre)) {
     font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
     color: var(--light-gray);
     background-color: var(--dark-gray);
     font-weight: 400;
-    padding: 0 0.25rem;
+    padding: 0 0.25rem 3px 0.25rem;
 }
 
-:global(.post-section pre code) {
+:global(.blog-section pre) {
+    background-color: var(--dark-gray) !important;
+    border-radius: 0 !important;
+    margin-bottom: 3rem !important;
+}
+:global(.blog-section pre code) {
     font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
     font-weight: 400;
 }
