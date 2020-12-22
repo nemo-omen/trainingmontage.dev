@@ -14,7 +14,7 @@ Learning frontend web-development can be pretty tough. Aside from the months you
 
 With any luck we'll both learn something.
 
-### But first...
+__But first...__
 
 Before I start writing about this, let me just say that I know [SvelteKit](https://svelte.dev/blog/whats-the-deal-with-sveltekit) is on the way and will most likely make Sapper obsolete. Still, Rich Harris has said that the Svelte contributors are taking pains to make the transition from Sapper to SvelteKit pretty painless. I think this means that learning to use Sapper will transfer over to SvelteKit (as a matter of fact, I've tried some of the techniques I'll go over using SvelteKit, so, with some minor changes in syntax, a lot of this should still apply.)
 

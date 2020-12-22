@@ -18,7 +18,7 @@ export const mdsvexOptions = mdsvex({
         blog: path.resolve(__dirname, 'src/layouts/blog.svelte'),
     },
     rehypePlugins: [
-        slug
+        slug,
     ],
     highlight: {
         highlighter: (code, lang) => {

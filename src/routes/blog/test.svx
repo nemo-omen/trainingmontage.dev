@@ -18,6 +18,8 @@ We recreate all of it using a different build system like Snowpack.
 
 Either way, I'm liking the look of the typography here. Lots of whitespace and the text is nice and readable. Let's add a code block and see what's what.
 
+### A code block
+
 ```js
 const myName = 'Jeff Caldwell';
 let currentpursuits = ['Learning JavaScript', 'Studying Computer Science', 'Writing', 'Making Websites'];
@@ -26,3 +28,8 @@ async function doSomething(thing) {
     console.log(thing);
 } 
 ```
+## A second level two heading
+
+### Second level three
+
+#### A level four
