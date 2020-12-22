@@ -10,7 +10,7 @@
     });
 </script>
 
-<nav>
+<nav id="top">
     <a href="/" rel="prefetch" class="{$page.path === '/' ? 'active' : 'normal'}">home</a>
     <a href="/blog" rel="prefetch" class="{$page.path === '/blog' || splitPage[1] === 'blog' ? 'active' : 'normal'}">blog</a>
     <a href="/about" rel="prefetch" class="{$page.path === '/about' ? 'active' : 'normal'}">about</a>
