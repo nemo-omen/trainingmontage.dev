@@ -7,8 +7,8 @@
         <hgroup>
             <a href={post.path} title={post.title}>
                 <h2 class="post-item-title">{post.title}</h2>
-                <h3 class="post-item-meta">{post.date}</h3>
             </a>
+                <h3 class="post-item-meta">{post.date}</h3>
         </hgroup>
     </header>
     <section class="post-item-body">
