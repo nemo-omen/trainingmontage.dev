@@ -51,21 +51,17 @@
 </main>
 
 <style>
-:global(.post-section pre) {
-    margin-top: 3rem !important;
-    background-color: rgb(31, 41, 55) !important;
-    border-radius: 0 !important;
-}
-
 :global(code:not(pre)) {
     font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
-    @apply text-blue-900;
+    color: var(--light-gray);
+    background-color: var(--dark-gray);
+    font-weight: 400;
+    padding: 0 0.25rem;
 }
 
 :global(.post-section pre code) {
-    @apply
-        bg-gray-800;
     font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
+    font-weight: 400;
 }
 
 /* deal with first-line indentation issues from prism */
