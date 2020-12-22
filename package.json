@@ -55,6 +55,7 @@
     "postcss-import": "^13.0.0",
     "prism-svelte": "^0.4.7",
     "prismjs": "^1.22.0",
+    "rehype-slug": "^4.0.1",
     "rollup": "^2.34.2",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.2",
