@@ -74,7 +74,7 @@
     }
     .heading-xl {
         font-size: 2.875rem;
-        font-weight: 600;
+        font-weight: 400;
         line-height: 1.375;
     }
     .meta {

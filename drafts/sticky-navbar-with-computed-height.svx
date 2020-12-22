@@ -1,0 +1,10 @@
+---
+title: Sticky nav menus with computedStyle
+author: Jeff Caldwell
+description: Making a sticky nav menu using position:sticky and computedStyles
+date: Wednesday, December 23, 2020
+tags: ['css', 'JavaScript', 'Svelte', 'sticky nav', 'scroll-behavior']
+layout: blog
+---
+
+I added a table of contents to my blog posts yesterday and, while it looked fine over in the sidebar, it would scroll with the rest of the page. Now, don't get me wrong — obviously elements are supposed to scroll with the page. But sometimes you need an element to stay visible on the page in order for it to be useful.
