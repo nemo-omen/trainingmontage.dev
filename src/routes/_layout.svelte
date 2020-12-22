@@ -22,11 +22,10 @@
 		{path ? path.charAt(0).toUpperCase() + path.slice(1) : "Index"}
 	</title>
 </svelte:head>
-<section id="app">
-	<div class="app-wrapper">
+<div id="app">
 		<slot />
-	</div>
-</section>
+</div>
+
 
 <style>
 	

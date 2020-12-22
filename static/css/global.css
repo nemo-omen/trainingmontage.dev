@@ -9,12 +9,21 @@
     --sans: 'Roboto', sans-serif;
     }
 
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     padding: 0;
     margin: 0;
     font-size: 1rem;
     color: var(--dark-gray);
     font-weight: 500;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
 }
 
 main {
@@ -27,8 +36,9 @@ main > * + * {
 }
 
 img {
-    max-width: 100%;
     height: auto;
+    max-width: 100%;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.6), 5px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 a {
@@ -133,8 +143,12 @@ h4 {
     body {
         font-size: 1.25rem;
     }
+    #app {
+        flex-direction: row;
+    }
     main {
         margin: 2.75rem;
+        width: 50%;
     }
     main > * + * {
         margin-top: 3.5rem;
@@ -160,8 +174,13 @@ h4 {
     body {
         font-size: 1.25rem;
     }
+    #app {
+        flex-direction: row;
+    }
     main {
         margin: 3rem;
+        width: 60%;
+        padding-right: 10%;
     }
     main > * + * {
         margin-top: 4rem;

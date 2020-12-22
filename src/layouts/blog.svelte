@@ -23,10 +23,6 @@
 </main>
 
 <style>
-:global(.post-section > * + *) {
-    @apply mt-12;
-}
-
 :global(.post-section pre) {
     margin-top: 3rem !important;
     background-color: rgb(31, 41, 55) !important;
