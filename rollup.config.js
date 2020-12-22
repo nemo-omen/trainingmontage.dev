@@ -1,24 +1,14 @@
 import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import config from "sapper/config/rollup";
-import { mdsvex } from "mdsvex";
+import { mdsvexOptions } from './mdsvex.config';
 import path from 'path';
 import pkg from "./package.json";
-import Prism from 'prismjs';
 import replace from "@rollup/plugin-replace";
 import resolve from "@rollup/plugin-node-resolve";
 import svelte from "rollup-plugin-svelte";
 import { terser } from "rollup-plugin-terser";
 import url from '@rollup/plugin-url';
-
-
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-diff';
-import 'prismjs/components/prism-markdown';
-import 'prismjs/plugins/diff-highlight/prism-diff-highlight';
-import 'prismjs/plugins/line-numbers/prism-line-numbers';
-import 'prism-svelte';
-import 'prismjs/components/prism-json';
 
 
 
@@ -43,29 +33,7 @@ export default {
 			}),
 			svelte({
 				extensions: ['.svelte', '.svx'],
-				preprocess: mdsvex({
-					layout: {
-						default: path.resolve(__dirname, 'src/layouts/default.svelte'),
-						blog: path.resolve(__dirname, 'src/layouts/blog.svelte'),
-					},
-					highlight: {
-						highlighter: (code, lang) => {
-							if(lang && Prism.languages[lang]) {
-								const parsed = Prism.highlight(code, Prism.languages[lang], lang);
-								const escaped = parsed
-									.replace(/{/g, '&#123;')
-									.replace(/}/g, '&#125;');
-								const langTag = 'language-' + lang;
-								const codeTag = `<code class="${langTag}">${escaped}</code>`;
-								const wrapped = `<pre class="${langTag} code-pre line-numbers">${codeTag}</pre>`;
-								return wrapped;
-							}else {
-								const escaped = code.replace(/{/g, '&#123;').replace(/}/g, '&#125;');
-								  return `<pre class="code-pre"><code class="m-4">${escaped}</code></pre>`;
-							}
-						}
-					},
-				}),
+				preprocess: mdsvexOptions,
 				compilerOptions: {
 					dev,
 					hydratable: true
@@ -117,29 +85,7 @@ export default {
 			}),
 			svelte({
 				extensions: ['.svelte', '.svx'],
-				preprocess: mdsvex({
-					layout: {
-						default: path.resolve(__dirname, 'src/layouts/default.svelte'),
-						blog: path.resolve(__dirname, 'src/layouts/blog.svelte'),
-					},
-					highlight: {
-						highlighter: (code, lang) => {
-							if(lang && Prism.languages[lang]) {
-								const parsed = Prism.highlight(code, Prism.languages[lang], lang);
-								const escaped = parsed
-									.replace(/{/g, '&#123;')
-									.replace(/}/g, '&#125;');
-								const langTag = 'language-' + lang;
-								const codeTag = `<code class="${langTag}">${escaped}</code>`;
-								const wrapped = `<pre class="${langTag} code-pre line-numbers">${codeTag}</pre>`;
-								return wrapped;
-							}else {
-								const escaped = code.replace(/{/g, '&#123;').replace(/}/g, '&#125;');
-								  return `<pre class="code-pre"><code class="m-4">${escaped}</code></pre>`;
-							}
-						}
-					},
-				}),
+				preprocess: mdsvexOptions,
 				compilerOptions: {
 					dev,
 					generate: 'ssr',
