@@ -83,6 +83,10 @@
         }
     }
     @media (min-width: 1024px) {
+        .sidebar {
+            width: 40%;
+            min-width: 40%;
+        }
         .heading-xl {
             font-size: 3.75rem;
         }
