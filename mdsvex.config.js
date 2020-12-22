@@ -17,6 +17,9 @@ export const mdsvexOptions = mdsvex({
         default: path.resolve(__dirname, 'src/layouts/default.svelte'),
         blog: path.resolve(__dirname, 'src/layouts/blog.svelte'),
     },
+    rehypePlugins: [
+        slug
+    ],
     highlight: {
         highlighter: (code, lang) => {
             if(lang && Prism.languages[lang]) {
