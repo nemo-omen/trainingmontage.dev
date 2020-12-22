@@ -22,7 +22,6 @@
     .post-item-title {
         letter-spacing: 0.025rem;
         margin: 0;
-        font-weight: 500;
     }
     .post-item-meta {
         margin-top: 0.5rem;
