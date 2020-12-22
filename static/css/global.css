@@ -54,7 +54,7 @@ img {
 a {
     color: var(--blue);
     text-decoration: underline;
-    text-decoration-style: dashed;
+    text-decoration-style: dotted;
     text-decoration-thickness: 1px;
     transition-property: color;
     transition-duration: 300ms;
