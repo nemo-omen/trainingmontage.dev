@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from 'svelte';
     import Nav from './Nav.svelte';
     import TOC from './TOC.svelte';
 
@@ -6,9 +7,32 @@
     export let meta = undefined;
     export let expo = '';
     export let tocList = undefined;
+
+    function cssVariables(node, variables) {
+        setCssVariables(node, variables);
+
+        return {
+            update(variables) {
+                setCssVariables(node, variables)
+            }
+        };
+    }
+
+    function setCssVariables(node, variables) {
+        for(const name in variables) {
+            node.style.setProperty(`--${name}`, variables[name]);
+        }
+    }
+
+    let sidebar;
+    $: sidebarHeight = 0;
+
+    onMount(() => {
+        sidebarHeight = getComputedStyle(sidebar).height;
+    });
 </script>
 
-<aside class="sidebar">
+<aside class="sidebar" bind:this={sidebar}>
         <Nav/>
         <section class="sidebar-body">
             <hgroup>
@@ -23,10 +47,10 @@
             <p class="expo">
                 {expo}
             </p>
-            <section class="extra">
+            <section class="extra" use:cssVariables={{sidebarHeight: sidebarHeight}}>
                 <slot/>
                 {#if tocList !== undefined}
-                    <TOC {tocList}/>
+                <TOC {tocList}/>
                 {/if}
             </section>
         </section>
@@ -102,6 +126,9 @@
         .sidebar-body > * + * {
             margin-top: 2.75rem;
         }
+        .extra {
+            height: var(--sidebarHeight);
+        }
     }
     @media (min-width: 1280px) {
         .sidebar {
@@ -116,6 +143,9 @@
         }
         .sidebar-body > * + * {
             margin-top: 3rem;
+        }
+        .extra {
+            height: var(--sidebarHeight);
         }
     }
 </style>

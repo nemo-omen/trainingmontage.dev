@@ -18,6 +18,9 @@
     .table-of-contents {
         padding: 2rem 0;
         margin: 0 auto;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 2rem;
     }
     .toc-heading {
         font-size: 1.875rem;
@@ -35,4 +38,12 @@
         font-family: var(--sans);
         font-weight: 400;
     }
+
+    /* @media (min-width: 1024px) {
+        .table-of-contents {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 20px;
+        }
+    } */
 </style>
