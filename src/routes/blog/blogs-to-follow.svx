@@ -25,6 +25,8 @@ This will be a running list of blogs I find useful.
 
 [Greg Wolanski](https://gregwolanski.com/)
 
+[Martin Underhill](https://www.tempertemper.net/)
+
 [DevDojo](https://devdojo.com/)
 
 [DEV.to list of blogs and lists to follow](https://dev.to/thomlom/what-are-your-favorite-web-development-blogs-e6i)
