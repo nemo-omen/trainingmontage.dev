@@ -211,6 +211,15 @@ author: Jeff Caldwell
     });
 </script>
 
+<section class="commits">
+    <h3 class="viz-header"><span class="highlight">{totalCommits}</span> commits over <span class="highlight">{numberOfDays}</span> days. An average of <span class="highlight">{Math.round(totalCommits / numberOfDays)}</span> commits per day (D3)</h3>
+    <div class="lc-wrapper">
+        <div class="lc-chart" bind:this={chartElement}>
+            
+        </div>
+    </div>
+</section>
+
 ## What's this?
 In an ongoing attempt to learn just a bit more about data visualization, I decided to start tracking my github pushes over time. The publicly available [Github API](https://docs.github.com/en/free-pro-team@latest/rest) gave me an opportunity to do that. The default pagination of the API also gave me an opportunity to learn how to make multiple API calls based on the first response. I learned a little about using `Promise.all()`, which I'll be using again because coupling it with `async/await` makes using fetch much more predictable.
 
@@ -232,15 +241,6 @@ I'll write more about the process of fetching, curing, and rendering this data. 
 
 [How to draw a simple line chart](https://observablehq.com/@jeantimex/how-to-draw-a-basic-line-chart)
 
-
-    <section class="commits">
-        <h3 class="viz-header"><span class="highlight">{totalCommits}</span> commits over <span class="highlight">{numberOfDays}</span> days. An average of <span class="highlight">{Math.round(totalCommits / numberOfDays)}</span> commits per day (D3)</h3>
-        <div class="lc-wrapper">
-            <div class="lc-chart" bind:this={chartElement}>
-                
-            </div>
-        </div>
-    </section>
 <style>
     .lc-chart {
         margin-bottom: 2rem;
