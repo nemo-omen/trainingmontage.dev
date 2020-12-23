@@ -75,17 +75,5 @@
     "tailwindcss": "^2.0.2",
     "tailwindcss-grid-template": "^0.0.3",
     "twitter-lite": "^0.14.0"
-  },
-  "prettier": {
-    "trailingComma": "all",
-    "semi": "true",
-    "singleQuote": "true",
-    "arrowParens": "true",
-    "printWidth": 80,
-    "tabWidth": 2,
-    "tabs": false,
-    "bracketSpacing": true,
-    "svelteSortOrder": "scripts-markup-styles",
-    "svelteIndentScriptAndStyle": true
   }
 }

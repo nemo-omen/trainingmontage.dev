@@ -1,0 +1,41 @@
+---
+title: Resources
+author: Jeff Caldwell
+date: Wednesday, December 23, 2020
+layout: default
+toc: true
+---
+
+<section class="link-list">
+  
+  ## HTML
+
+</section>
+
+<section class="link-list">
+
+  ## CSS
+
+</section>
+
+<section class="link-list">
+
+  ## SVG
+
+  ### Icons
+  [Fluent Icons Viewer](https://fluenticons.co/) — by [Fayaz Ahmed](https://twitter.com/fayazara)
+
+</section>
+
+<section class="link-list">
+
+  ## JavaScript
+
+</section>
+
+<section class="link-list">
+
+  ## General Programming
+
+</section>
+
