@@ -2,7 +2,7 @@
 layout: blog
 title: Visualizing Pushes to GitHub with D3
 subtitle: Simple line charts with D3
-description: My Github push actions over the past 40(ish) days, visualized with D3
+description: My Github push actions over the past 14 days, visualized with D3
 date: Sunday, December 6, 2020
 author: Jeff Caldwell
 ---
@@ -62,7 +62,7 @@ author: Jeff Caldwell
     }
 
     async function processData(dataArray) {
-        console.log(dataArray);
+        console.log('dataArray: ', dataArray);
         let chartData = dataArray
             .filter((dataObject) => dataObject.type === 'PushEvent')
             .map((event) => {
@@ -98,6 +98,7 @@ author: Jeff Caldwell
             };
         });
         events = [...groupArray];
+        console.log('events', events);
         buildChart(events);
         buildLayerCake(events);
     }
