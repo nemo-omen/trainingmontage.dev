@@ -6,6 +6,7 @@
     export let date;
     export let author;
     export let description = '';
+    export let toc = false;
     export let layout; //suppress unknown prop warning
 
     const { page } = stores();
@@ -42,7 +43,7 @@
         meta={{author: author, date: date}}
         {title}
         expo={description}
-        tocList={headings}
+        tocList={toc === true ? headings : undefined}
     />
 <main>
     <section class="blog-section" bind:this={postSection}>

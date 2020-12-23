@@ -6,6 +6,7 @@ date: "Wednesday, December 3, 2020"
 description: If you're pursuing web-dev, it's a good idea to read-up on developments, techniques, and other fun stuff people are working on.
 layout: blog
 tags: ['post', 'dev', 'webdev', 'design', 'blogs']
+toc: true
 ---
 
 This will be a running list of blogs I find useful.

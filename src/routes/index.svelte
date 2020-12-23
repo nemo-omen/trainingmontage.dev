@@ -23,8 +23,8 @@
 	expo="I'm Jeff Caldwell, a computer science student who loves web development and JavaScript. I write about the things I'm learning here.">
 	<section class="contact-info">
 		<h2>On the web</h2>
-		<p>twitter: <a href="https://twitter.com/trainingm0ntage" class="text-blue-300">@trainingm0ntage</a></p>
-		<p>LinkedIn: <a href="https://www.linkedin.com/in/jeff-caldwell-4424181a" class="text-blue-300">Jeff Caldwell</a></p>
+		<p>twitter: <a href="https://twitter.com/trainingm0ntage">@trainingm0ntage</a></p>
+		<p>LinkedIn: <a href="https://www.linkedin.com/in/jeff-caldwell-4424181a">Jeff Caldwell</a></p>
 	</section>
 </Sidebar>
 <main>

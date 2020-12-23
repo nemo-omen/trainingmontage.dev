@@ -1,0 +1,237 @@
+---
+layout: blog
+title: Visualizing Pushes to GitHub with D3
+subtitle: Simple line charts with D3
+description: My Github push actions over the past 40(ish) days, visualized with D3
+date: Sunday, December 6, 2020
+author: Jeff Caldwell
+---
+
+<script>
+    import { axisBottom, axisLeft } from 'd3-axis'
+    import { extent } from 'd3-array';
+    import LinkHeader from 'http-link-header';
+    import { line } from 'd3-shape';
+    import { onMount, tick } from 'svelte';
+    import { path } from 'd3-path';
+    import { scaleLinear, scaleTime } from 'd3-scale';
+    import { select } from 'd3-selection';
+    import { timeParse, timeFormat } from 'd3-time-format';
+
+    $: events = [];
+
+    const baseUrl = `https://api.github.com/users/nemo-omen/events?per_page=100`;
+
+    let chartElement;
+
+    async function getDataPromises(url) {
+        let aggregatedData = [];
+        var fetchCalls = [];
+        const initialResponse = await fetch(url);
+
+        if(initialResponse.status !== 200) {
+            console.error(initialResponse.status, initialResponse.message);
+        }
+
+        const headers = initialResponse.headers;
+
+        if(headers.has('link')) {
+            const link = headers.get('link');
+            const parsed = LinkHeader.parse(link);
+            parsed.refs.forEach((parsedLink) => {
+                fetchCalls.push(fetch(parsedLink.uri));
+            });
+        }
+
+        const initialData = await initialResponse.json();
+        initialData.forEach((event) => aggregatedData.push(event));
+        
+        Promise.all(fetchCalls).then((responses) => {
+            return Promise.all(responses.map((response) => {
+                return response.json();
+            })).then((data) => {
+                data.forEach((array) => {
+                    array.forEach((event) => {
+                        aggregatedData.push(event);
+                    })
+                })
+                processData(aggregatedData);
+            })
+        }).catch((error) => console.error(error));
+
+    }
+
+    async function processData(dataArray) {
+        console.log(dataArray);
+        let chartData = dataArray
+            .filter((dataObject) => dataObject.type === 'PushEvent')
+            .map((event) => {
+                event.payload.commits.map((commit) => {
+                    return {
+                        message: commit.message,
+                        commitUrl: commit.url,
+                    }
+            });
+
+            return {
+                id: event.id,
+                date: new Date(event.created_at).toLocaleDateString(),
+                repoUrl: event.repo.url,
+                repoName: event.repo.name,
+                commits: event.payload.commits,
+            };
+        });
+
+        let groups = chartData.reduce((groups, commit) => {
+                const date = commit.date;
+                if(!groups[date]) {
+                    groups[date] = [];
+                }
+                groups[date].push(commit);
+                return groups;
+            }, {});
+
+        const groupArray = Object.entries(groups).map((day) => {
+            return {
+                date: day[0],
+                commits: day[1]
+            };
+        });
+        events = [...groupArray];
+        buildChart(events);
+        buildLayerCake(events);
+    }
+
+    function buildChart(dataSet) {
+        
+        const wrapper = select(chartElement);
+        
+        const dimensions = {
+            height: 600,
+            width: 1200,
+            margin: {
+                top: 16,
+                right: 16,
+                bottom: 32,
+               left: 32
+            },
+        }
+
+        dimensions.boundedWidth = dimensions.width - (dimensions.margin.left + dimensions.margin.right);
+        dimensions.boundedHeight = dimensions.height - (dimensions.margin.top + dimensions.margin.bottom);
+
+        const dateParser = timeParse("%m/%d/%Y");
+        
+        const yAccessor = (data) => data.commits.length;
+        
+        const xAccessor = (data) => dateParser(data.date);
+        
+        const svg = wrapper.append('svg')
+            .attr('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`);
+
+        const sizeRect = svg.append('rect')
+            .attr('fill', 'none')
+            .attr('width', dimensions.width)
+            .attr('height', dimensions.height);
+
+        const bounds = svg.append('g')
+            .style('transform', `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`);
+        
+        const yScale = scaleLinear()
+            .domain(extent(dataSet, yAccessor))
+            .range([dimensions.boundedHeight, 0]);
+
+        const xScale = scaleTime()
+            .domain(extent(dataSet, xAccessor))
+            .range([0, dimensions.boundedWidth]);
+
+        const lineGenerator = line()
+            .x((data) => xScale(xAccessor(data)))
+            .y((data) => yScale(yAccessor(data)));
+
+
+        const yGrid = bounds.append('g')
+            .attr('class', 'grid-lines')
+            .selectAll('line')
+            .data(yScale.ticks())
+            .join('line')
+            .attr('x1', 0)
+            .attr('x2', dimensions.width - (dimensions.margin.right + dimensions.margin.left))
+            .attr('y1', d => yScale(d))
+            .attr('y2',d => yScale(d))
+            .attr('stroke', '#2d3b52');
+
+        const chartLine = bounds.append('path')
+            .attr('d', lineGenerator(dataSet))
+            .attr('stroke', '#ffbb28')
+            .attr('fill', 'none')
+            .attr('stroke-width', 2);
+
+        const yAxisGenerator = axisLeft()
+            .scale(yScale);
+
+        const xAxisGenerator = axisBottom()
+            .scale(xScale);
+
+        const yAxis = bounds.append('g')
+            .call(yAxisGenerator);
+
+        const xAxis = bounds.append('g')
+            .call(xAxisGenerator)
+            .style('transform', `translateY(${dimensions.boundedHeight}px)`);
+    }
+
+    $: lcData = [];
+    $: totalCommits = 0;
+    $: numberOfDays = 0;
+
+    function buildLayerCake(dataSet) {
+        const dateParser = timeParse("%m/%d/%Y");
+        lcData = dataSet.map((data) => {
+            return {
+                date: dateParser(data.date),
+                commits: data.commits.length
+            };
+        });
+        lcData.map((commit) => {
+            totalCommits += commit.commits
+            numberOfDays += 1;
+        });
+        console.log('lcData: ',lcData);
+        console.log('Total Commits: ', totalCommits);
+        console.log('Number of Days: ', numberOfDays);
+    }
+
+    const formatTickX = timeFormat('%b. %e');
+
+    onMount(async() => {
+        await getDataPromises(baseUrl);
+        await tick();
+    });
+</script>
+
+
+In an ongoing attempt to learn just a bit more about data visualization, I decided to start tracking my github pushes over time. The publicly available [Github API](https://docs.github.com/en/free-pro-team@latest/rest) gave me an opportunity to do that. The default pagination of the API also gave ma an opportunity to learn how to make multiple API calls based on the first response. I learned a little about using `Promise.all()`, which I'll be using again because coupling it with `async/await` makes using fetch much more predictable.
+
+I'll write more about the process of fetching, curing, and rendering this data. For now, I'll just leave a link to a list of publicly available APIs that can be used for dataviz projects.
+
+[70 free and amazing data sources for data visualization](https://bigdata-madesimple.com/70-amazing-and-free-data-sources-for-data-visualization/)
+
+    <section class="commits">
+        <h3 class="viz-header"><span class="highlight">{totalCommits}</span> commits over <span class="highlight">{numberOfDays}</span> days. An average of <span class="highlight">{Math.round(totalCommits / numberOfDays)}</span> commits per day (D3)</h3>
+        <div class="lc-wrapper">
+            <div class="lc-chart" bind:this={chartElement}>
+                
+            </div>
+        </div>
+    </section>
+<style>
+    .lc-chart {
+        margin-bottom: 2rem;
+        background-color: var(--dark-gray);
+        color: var(--accent);
+    }
+    .highlight {
+        color: var(--accent);
+    }
+</style>

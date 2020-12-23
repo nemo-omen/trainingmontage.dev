@@ -4,4 +4,18 @@ title: about
 expo: I'm constantly learning and writing about web development and I'm always working on something.
 ---
 
-This is going to be a simple page for me to describe what I like and what I'm good at. Hopefully I'll get a few projects to put up soon.
+I know, I know, I'm supposed to take the time to really think about the things I want people, and especially potential employers to know about me. Then I'm supposed to really jazz it up so I sound like the best developer to solve _your_ specific problems.
+
+The thing is, I really don't much like writing about myself.
+
+So, here's the deal, jack. I'm learning web development every day.
+
+Here's what I'm getting better at:
+
+- HTML
+- CSS
+- JavaScript
+- Svelte
+- DataViz
+  
+You can find me on [twitter](https://twitter.com/trainingm0ntage) or on [LinkedIn](https://www.linkedin.com/in/jeff-caldwell-4424181a).

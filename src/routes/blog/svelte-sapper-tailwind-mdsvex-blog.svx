@@ -6,6 +6,7 @@ description: How I made this site using Svelte/Sapper, TailwindCss, and mdsvex
 tags: ['Svelte', 'Sapper', 'TailwindCss', 'mdsvex', 'Blog', 'Markdown', 'JavaScript', 'CSS', 'Tutorial', 'Web Development', 'pnpm']
 date: Tuesday, December 15, 2020
 layout: blog
+toc: true
 ---
 
 Learning frontend web-development can be pretty tough. Aside from the months you have to spend learning all of the basics of CSS, HTML, and JavaScript, you have to contend with a myriad of available frameworks, build tools, hosting, and on, and on. So it's nice when people make libraries and tools to make that process easier.

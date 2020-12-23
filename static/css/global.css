@@ -1,7 +1,9 @@
 :root {
-    --blue: rgb(59, 130, 246);
+    --blue: #3b82f6;
+    --muted-dark-blue: #2d3b52;
     --light-blue: rgb(147, 197, 253);
     --dark-blue: rgb(37, 99, 235);
+    --accent: #ffbb28;
     --light-gray: rgb(229, 231, 235);
     --dark-gray: rgb(31, 41, 55);
     --mid-gray: rgb(45, 57, 75);
