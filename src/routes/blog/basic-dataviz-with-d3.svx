@@ -212,7 +212,7 @@ author: Jeff Caldwell
 </script>
 
 ## What's this?
-In an ongoing attempt to learn just a bit more about data visualization, I decided to start tracking my github pushes over time. The publicly available [Github API](https://docs.github.com/en/free-pro-team@latest/rest) gave me an opportunity to do that. The default pagination of the API also gave ma an opportunity to learn how to make multiple API calls based on the first response. I learned a little about using `Promise.all()`, which I'll be using again because coupling it with `async/await` makes using fetch much more predictable.
+In an ongoing attempt to learn just a bit more about data visualization, I decided to start tracking my github pushes over time. The publicly available [Github API](https://docs.github.com/en/free-pro-team@latest/rest) gave me an opportunity to do that. The default pagination of the API also gave me an opportunity to learn how to make multiple API calls based on the first response. I learned a little about using `Promise.all()`, which I'll be using again because coupling it with `async/await` makes using fetch much more predictable.
 
 ## What would make this better?
 
