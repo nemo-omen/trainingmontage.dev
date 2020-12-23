@@ -211,12 +211,27 @@ author: Jeff Caldwell
     });
 </script>
 
-
+## What's this?
 In an ongoing attempt to learn just a bit more about data visualization, I decided to start tracking my github pushes over time. The publicly available [Github API](https://docs.github.com/en/free-pro-team@latest/rest) gave me an opportunity to do that. The default pagination of the API also gave ma an opportunity to learn how to make multiple API calls based on the first response. I learned a little about using `Promise.all()`, which I'll be using again because coupling it with `async/await` makes using fetch much more predictable.
 
-I'll write more about the process of fetching, curing, and rendering this data. For now, I'll just leave a link to a list of publicly available APIs that can be used for dataviz projects.
+## What would make this better?
 
-[70 free and amazing data sources for data visualization](https://bigdata-madesimple.com/70-amazing-and-free-data-sources-for-data-visualization/)
+### Server-side fetching
+At the moment all of the fetching is done client-side, which means I can't include my GitHub token in the code. This limits the dataset to the last fourteen days (at least I think it does). If I were to move the API calls to the server I think I would be able to return a larger dataset safely (i.e. I wouldn't be flashing my Github token all over the internet). 
+
+### A more elaborate visualization
+GitHub includes a lot more information in the user events data that's returned from the API. I could feasably make a visualization of all of the different kinds of events over the returned time period. If I were to try a different kind of visualization I could include more detailed data, for example commit messages etc.
+
+## What's next?
+
+I have a lot to learn about D3. It's not the kind of (massive) library someone just picks up in a week or so. [Mike Bostock](https://observablehq.com/@mbostock) and all of the D3 contributors have spent well over a decade adding to and refining the library and it's widely considered to be the granddaddy of all web-based data-visualization. It's not an easy library, by any means, but mastering it (or, at least, becoming somewhat proficient in its use,) is a prerequisite for any serious work in data visualization on the web.
+
+Interestingly, both Mike Bostock and [Rich Harris](https://twitter.com/Rich_Harris) have been employed as graphics editors at the [New York Times](https://twitter.com/nytgraphics). Rich Harris currently works at the Times, while also developing [Svelte](http://svelte.dev). Mike Bostock is a former graphics editor there.
+
+I'll write more about the process of fetching, curing, and rendering this data. For now, I'll just leave a link to a great tutorial for creating a basic line chart in D3.
+
+[How to draw a simple line chart](https://observablehq.com/@jeantimex/how-to-draw-a-basic-line-chart)
+
 
     <section class="commits">
         <h3 class="viz-header"><span class="highlight">{totalCommits}</span> commits over <span class="highlight">{numberOfDays}</span> days. An average of <span class="highlight">{Math.round(totalCommits / numberOfDays)}</span> commits per day (D3)</h3>
