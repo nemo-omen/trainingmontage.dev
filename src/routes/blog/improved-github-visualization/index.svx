@@ -37,7 +37,7 @@ layout: blog
       console.log(`There was a problem loading the data at ${url}: `, response.statusCode);
     }
     const data = await response.json();
-    console.log(data);
+    reposLength = data.length;
 
     return data;
   }
