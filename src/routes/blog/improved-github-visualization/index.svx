@@ -227,7 +227,7 @@ layout: blog
   // console.log('chartElement', chartElement);
 
   onMount(() => {
-    const allCommits = getData('api/commits').then((data) => {
+    const allCommits = getData('/.netlify/functions/commits').then((data) => {
       // console.log(data);
       const parsed = parseData(data);
       buildChart(parsed);
