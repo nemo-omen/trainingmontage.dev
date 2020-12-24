@@ -1,0 +1,275 @@
+---
+title: Improved Github Commits Visualization
+author: Jaff Caldwell
+date: Wednesday, December 23, 2020
+description: Improving on my first Github commits visualization.
+layout: blog
+---
+
+<script context="module">
+  export async function preload() {
+    return await this.fetch(`blog/improved-github-visualization.json`)
+      .then((r) => r.json())
+      .then((commitsData) => {
+        return { commitsData };
+      });
+  }
+</script>
+
+<script>
+  import {onMount} from 'svelte';
+  import { extent } from 'd3-array';
+  import { axisBottom, axisLeft } from 'd3-axis'
+  import { path } from 'd3-path';
+  import { scaleLinear, scaleOrdinal, scaleTime, scaleBand } from 'd3-scale';
+  import { schemeDark2 } from 'd3-scale-chromatic';
+  import { select } from 'd3-selection';
+  import { line, curveBasis, curveNatural, curveLinear, curveBundle, curveCardinal } from 'd3-shape';
+  import { timeParse, timeFormat } from 'd3-time-format';
+
+  export let commitsData;
+
+  let chartElement;
+  let barChartElement;
+
+  //total number of repositories
+  $: reposLength = commitsData.length;
+
+  let dates = [];
+
+  let allCommits = [];
+
+  let totalCommits = 0;
+
+  // gather ye dates for display in heading
+  commitsData.forEach((commit) => {
+    Object.keys(commit.commits).forEach((date) => {
+      if(!dates[date]) {
+        dates.push(date);
+      }
+    });
+  });
+
+  // sort the dates
+  const sortedDates = dates.sort((a, b) => {
+    return Date.parse(a) < Date.parse(b) ? -1 : Date.parse(a) > Date.parse(b) ?  1 : 0;
+  });
+
+  const allCommitsNested = commitsData.map((data) => {
+    return Object.entries(data.commits).map((array) => {
+      return {
+        date: array[0],
+        commits: array[1].length
+      }
+    }).forEach((object) => allCommits.push(object));
+  });
+
+  const sortedCommits = allCommits.sort((a, b) => {
+    return Date.parse(a.date) < Date.parse(b.date) ? -1 : Date.parse(a.date) > Date.parse(b.date) ? 1 : 0;
+  }).filter((commit) => Date.parse(commit.date) > Date.parse('12/31/2019'));
+
+  sortedCommits.forEach((commitObject) => {
+    totalCommits += commitObject.commits;
+  });
+
+  function buildChart(dataSet) {
+
+    let chartLines = [];
+
+    const wrapper = select(chartElement);
+
+    console.log('wrapper: ', wrapper);
+        
+        const dimensions = {
+            height: 600,
+            width: 1200,
+            margin: {
+                top: 16,
+                right: 16,
+                bottom: 32,
+               left: 32
+            },
+        }
+
+        dimensions.boundedWidth = dimensions.width - (dimensions.margin.left + dimensions.margin.right);
+        dimensions.boundedHeight = dimensions.height - (dimensions.margin.top + dimensions.margin.bottom);
+
+        const dateParser = timeParse("%m/%d/%Y");
+
+        const yAccessor = (data) => data.commits;
+        
+        const xAccessor = (data) => dateParser(data.date);
+        
+        const svg = wrapper.append('svg')
+            .attr('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`);
+
+        const sizeRect = svg.append('rect')
+            .attr('fill', 'none')
+            .attr('width', dimensions.width)
+            .attr('height', dimensions.height);
+
+        const bounds = svg.append('g')
+            .style('transform', `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`);
+        
+        const yScale = scaleLinear()
+            .domain(extent(dataSet, yAccessor))
+            .range([dimensions.boundedHeight, 0]);
+
+        const xScale = scaleTime()
+            .domain(extent(dataSet, xAccessor))
+            .range([0, dimensions.boundedWidth]);
+
+        const lineGenerator = line()
+            .x((data) => xScale(xAccessor(data)))
+            .y((data) => yScale(yAccessor(data)));
+
+
+        const yGrid = bounds.append('g')
+            .attr('class', 'grid-lines')
+            .selectAll('line')
+            .data(yScale.ticks())
+            .join('line')
+            .attr('x1', 0)
+            .attr('x2', dimensions.width - (dimensions.margin.right + dimensions.margin.left))
+            .attr('y1', d => yScale(d))
+            .attr('y2',d => yScale(d))
+            .attr('stroke', '#2d3b52');
+
+        const chartLine = bounds.append('path')
+            .attr('d', lineGenerator(dataSet))
+            .attr('stroke', '#ffbb28')
+            .attr('fill', 'none')
+            .attr('stroke-width', 2);
+
+        const yAxisGenerator = axisLeft()
+            .scale(yScale);
+
+        const xAxisGenerator = axisBottom()
+            .scale(xScale);
+
+        const yAxis = bounds.append('g')
+            .call(yAxisGenerator);
+
+        const xAxis = bounds.append('g')
+            .call(xAxisGenerator)
+            .style('transform', `translateY(${dimensions.boundedHeight}px)`);
+
+        // now add the bar chart stuff
+
+        const bxScale = scaleBand().padding(0.2)
+            .domain(dataSet.map((d) => d.date))
+            .range([0, dimensions.boundedWidth]);
+
+        const barWrapper = select(barChartElement);
+
+        const bsvg = barWrapper.append('svg')
+            .attr('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`);
+
+        const barSizeRect = svg.append('rect')
+            .attr('fill', 'none')
+            .attr('width', dimensions.width)
+            .attr('height', dimensions.height);
+
+        const bBounds = bsvg.append('g')
+            .style('transform', `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`);
+
+        const byGrid = bBounds.append('g')
+            .attr('class', 'grid-lines')
+            .selectAll('line')
+            .data(yScale.ticks())
+            .join('line')
+            .attr('x1', 0)
+            .attr('x2', dimensions.width - (dimensions.margin.right + dimensions.margin.left))
+            .attr('y1', d => yScale(d))
+            .attr('y2',d => yScale(d))
+            .attr('stroke', '#2d3b52');
+
+        // const chartLine = bounds.append('path')
+        //     .attr('d', lineGenerator(dataSet))
+        //     .attr('stroke', '#ffbb28')
+        //     .attr('fill', 'none')
+        //     .attr('stroke-width', 2);
+
+        bsvg.append('g')
+          .attr('transform', `translate(${dimensions.margin.left}, ${dimensions.margin.top})`)
+          .selectAll('rect')
+          .data(dataSet)
+          .join('rect')
+          .attr('fill', '#ffbb28')
+          .attr('x', (d) => bxScale(d.date))
+          .attr('y', (d) => yScale(d.commits))
+          .attr('height', (d) => dimensions.boundedHeight - yScale(d.commits))
+          .attr('width', bxScale.bandwidth())
+
+        const byAxis = bBounds.append('g')
+            .call(yAxisGenerator);
+
+        const bxAxis = bBounds.append('g')
+            .call(xAxisGenerator)
+            .style('transform', `translateY(${dimensions.boundedHeight}px)`);
+
+        
+  }
+
+  console.log('chartElement', chartElement);
+
+  onMount(() => {
+    buildChart(sortedCommits);
+    console.log('totalCommits', totalCommits);
+  });
+
+</script>
+
+
+<section class="commits">
+<h3><span class="highlight">{totalCommits}</span> commits in <span class="highlight">{reposLength}</span> repositories from <span class="highlight">{sortedDates[0]}</span> to <span class="highlight">{sortedDates[sortedDates.length - 1]}</span></h3>
+
+  <section class="chart" bind:this={chartElement}>
+
+  </section>
+
+</section>
+
+Wow that's ugly! What happened?
+
+The hideous chart above is a consequence of my attempt to improve on the [basic line chart](/blog/basic-dataviz-with-d3) of GitHub commits I made earlier this month. I foolishly thought that throwing more data at it would be an improvement.
+
+As you can see, I was wrong. So what's the problem?
+
+I'm trying to use the wrong type of visualization for the data. I want to communicate the variance in my GitHub commit activity over a given period of time. Line charts are good for data that's more or less continuous. The problem with the data I'm providing is that there are periods of high activity interspersed with periods of no activity at all. A line chart just sort of obfuscates what we're trying to communicate.
+
+What we need is a bar chart.
+
+<section class="commits">
+<h3><span class="highlight">{totalCommits}</span> commits in <span class="highlight">{reposLength}</span> repositories from <span class="highlight">{sortedDates[0]}</span> to <span class="highlight">{sortedDates[sortedDates.length - 1]}</span></h3>
+
+  <section class="chart" bind:this={barChartElement}>
+
+  </section>
+
+</section>
+
+Actually, a bar chart is technically horizontal. This is a column chart or column graph, which is a vertical bar chart.
+
+Whatever kind of chart it is, it's important to consider what kind of information and meaning you're trying to communicate when you make a visualization. The line chart above, aside from being almost totally unappealing, just doesn't convey the information as well as the column chart.
+
+Once I've gotten some real practice with D3 I'll start writing some guides to making visualizations, especially within the context of using D3 within a modern framework like Svelte. D3's been around for a long time and there's quite a bit of old information available online. A lot of that information doesn't apply to using it the way someone would want to in this context.
+
+### Resources
+
+[How to Choose the Right Chart](https://towardsdatascience.com/data-visualization-how-to-choose-the-right-chart-part-1-d4c550085ea7)
+
+[How to Choose the Right Visualization Type](https://www.datapine.com/blog/how-to-choose-the-right-data-visualization-types/)
+
+
+
+<style>
+  .chart {
+    color: var(--accent);
+    background-color: var(--dark-gray);
+  }
+
+  .highlight {
+    color: var(--accent);
+  }
+</style>
