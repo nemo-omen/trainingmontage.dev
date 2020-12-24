@@ -95,21 +95,25 @@ const allCommits = commitsPromise.then((data) => {
 });
 
 exports.handler = async (event, context) => {
-  console.log(context);
+  // console.log(context);
   return allCommits
     .then(async (asyncData) => {
       const returnData = await Promise.all(asyncData).then((data) => {
         return data;
       });
+      return asyncData;
     })
-    .then((data) => ({
-      statusCode: 200,
-      body: JSON.stringify(data),
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
-    }))
+    .then(async (data) => {
+      const resolvedData = await Promise.all(data).then((data) => data);
+      return {
+        statusCode: 200,
+        body: JSON.stringify(resolvedData),
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
+      };
+    })
     .catch((error) => ({
       statusCode: 422,
       body: String(error),

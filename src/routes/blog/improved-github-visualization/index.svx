@@ -12,7 +12,6 @@ layout: blog
   import { axisBottom, axisLeft } from 'd3-axis'
   import { path } from 'd3-path';
   import { scaleLinear, scaleOrdinal, scaleTime, scaleBand } from 'd3-scale';
-  import { schemeDark2 } from 'd3-scale-chromatic';
   import { select } from 'd3-selection';
   import { line, curveBasis, curveNatural, curveLinear, curveBundle, curveCardinal } from 'd3-shape';
   import { timeParse, timeFormat } from 'd3-time-format';
@@ -215,7 +214,7 @@ layout: blog
   console.log('chartElement', chartElement);
 
   onMount(() => {
-    const allCommits = getData('/.netlify/functions/commits').then((data) => {
+    const allCommits = getData('api/commits').then((data) => {
       console.log(data);
       const parsed = parseData(data);
       buildChart(parsed);
