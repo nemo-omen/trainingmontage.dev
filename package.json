@@ -21,7 +21,7 @@
     "eslint": "eslint",
     "eslint:fix": "eslint --fix ./*.js ./src/*.js ./src/routes/**/*.svelte ./src/components/**/*.svelte",
     "dev": "sapper dev --ext '.svelte .svx'",
-    "build": "cross-env NODE_ENV=production sapper export --ext '.svelte .svx' --legacy && cp -R ./__sapper__/export ./public",
+    "build": "cross-env NODE_ENV=production sapper export --ext '.svelte .svx' --legacy",
     "prod": "npm run build",
     "export": "cross-env NODE_ENV=production sapper export --ext '.svelte .svx' --legacy",
     "start": "node __sapper__/build"

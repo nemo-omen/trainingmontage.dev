@@ -6,16 +6,6 @@ description: Improving on my first Github commits visualization.
 layout: blog
 ---
 
-<script context="module">
-  export async function preload() {
-    return await this.fetch(`blog/improved-github-visualization.json`)
-      .then((r) => r.json())
-      .then((commitsData) => {
-        return { commitsData };
-      });
-  }
-</script>
-
 <script>
   import {onMount} from 'svelte';
   import { extent } from 'd3-array';
@@ -27,21 +17,35 @@ layout: blog
   import { line, curveBasis, curveNatural, curveLinear, curveBundle, curveCardinal } from 'd3-shape';
   import { timeParse, timeFormat } from 'd3-time-format';
 
-  export let commitsData;
-
+  
   let chartElement;
   let barChartElement;
 
   //total number of repositories
-  $: reposLength = commitsData.length;
+  $: reposLength = 0;
 
   let dates = [];
 
-  let allCommits = [];
+  $: allCommits = [];
 
-  let totalCommits = 0;
+  $: totalCommits = 0;
+
+  $: sortedDates = [];
+
+  async function getData(url) {
+    const response = await fetch(url);
+    if(!response.statusCode === 200) {
+      console.log(`There was a problem loading the data at ${url}: `, response.statusCode);
+    }
+    const data = await response.json();
+    console.log(data);
+
+    return data;
+  }
 
   // gather ye dates for display in heading
+  function parseData(commitsData) {
+
   commitsData.forEach((commit) => {
     Object.keys(commit.commits).forEach((date) => {
       if(!dates[date]) {
@@ -51,7 +55,7 @@ layout: blog
   });
 
   // sort the dates
-  const sortedDates = dates.sort((a, b) => {
+  sortedDates = dates.sort((a, b) => {
     return Date.parse(a) < Date.parse(b) ? -1 : Date.parse(a) > Date.parse(b) ?  1 : 0;
   });
 
@@ -71,6 +75,8 @@ layout: blog
   sortedCommits.forEach((commitObject) => {
     totalCommits += commitObject.commits;
   });
+  return sortedCommits;
+  }
 
   function buildChart(dataSet) {
 
@@ -184,11 +190,6 @@ layout: blog
             .attr('y2',d => yScale(d))
             .attr('stroke', '#2d3b52');
 
-        // const chartLine = bounds.append('path')
-        //     .attr('d', lineGenerator(dataSet))
-        //     .attr('stroke', '#ffbb28')
-        //     .attr('fill', 'none')
-        //     .attr('stroke-width', 2);
 
         bsvg.append('g')
           .attr('transform', `translate(${dimensions.margin.left}, ${dimensions.margin.top})`)
@@ -214,7 +215,11 @@ layout: blog
   console.log('chartElement', chartElement);
 
   onMount(() => {
-    buildChart(sortedCommits);
+    const allCommits = getData('/.netlify/functions/commits').then((data) => {
+      console.log(data);
+      const parsed = parseData(data);
+      buildChart(parsed);
+    });
     console.log('totalCommits', totalCommits);
   });
 

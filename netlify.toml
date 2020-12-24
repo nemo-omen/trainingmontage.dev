@@ -1,0 +1,9 @@
+[dev]
+command = "pnpm run dev"
+
+port = 5000
+
+publish = "__sapper__/export"
+
+[build]
+functions = "functions"
