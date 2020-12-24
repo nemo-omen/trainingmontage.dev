@@ -14,6 +14,7 @@ layout: blog
   import { scaleLinear, scaleOrdinal, scaleTime, scaleBand } from 'd3-scale';
   import { select } from 'd3-selection';
   import { line, curveBasis, curveNatural, curveLinear, curveBundle, curveCardinal } from 'd3-shape';
+  import { timeMonth } from 'd3-time';
   import { timeParse, timeFormat } from 'd3-time-format';
 
   
@@ -34,7 +35,7 @@ layout: blog
   async function getData(url) {
     const response = await fetch(url);
     if(!response.statusCode === 200) {
-      console.log(`There was a problem loading the data at ${url}: `, response.statusCode);
+      // console.log(`There was a problem loading the data at ${url}: `, response.statusCode);
     }
     const data = await response.json();
     reposLength = data.length;
@@ -44,6 +45,9 @@ layout: blog
 
   // gather ye dates for display in heading
   function parseData(commitsData) {
+
+    commitsData = commitsData.filter((commit) => commit.name !== "MDsveX" && commit.name !== "tslab" && commit.name !== "obs-websocket-js");
+    console.log(commitsData);
 
   commitsData.forEach((commit) => {
     Object.keys(commit.commits).forEach((date) => {
@@ -56,7 +60,8 @@ layout: blog
   // sort the dates
   sortedDates = dates.sort((a, b) => {
     return Date.parse(a) < Date.parse(b) ? -1 : Date.parse(a) > Date.parse(b) ?  1 : 0;
-  });
+  }).filter((date) => Date.parse(date) > Date.parse("12/31/2018"));
+  
 
   const allCommitsNested = commitsData.map((data) => {
     return Object.entries(data.commits).map((array) => {
@@ -69,11 +74,14 @@ layout: blog
 
   const sortedCommits = allCommits.sort((a, b) => {
     return Date.parse(a.date) < Date.parse(b.date) ? -1 : Date.parse(a.date) > Date.parse(b.date) ? 1 : 0;
-  }).filter((commit) => Date.parse(commit.date) > Date.parse('12/31/2019'));
+  }).filter((commit) => Date.parse(commit.date) > Date.parse('12/31/2018'));
+
+
 
   sortedCommits.forEach((commitObject) => {
     totalCommits += commitObject.commits;
   });
+
   return sortedCommits;
   }
 
@@ -83,7 +91,7 @@ layout: blog
 
     const wrapper = select(chartElement);
 
-    console.log('wrapper: ', wrapper);
+    // console.log('wrapper: ', wrapper);
         
         const dimensions = {
             height: 600,
@@ -103,7 +111,11 @@ layout: blog
 
         const yAccessor = (data) => data.commits;
         
-        const xAccessor = (data) => dateParser(data.date);
+        const xAccessor = (data) => {
+          // console.log(dateParser(data.date));
+          return dateParser(data.date);
+          };
+
         
         const svg = wrapper.append('svg')
             .attr('viewBox', `0 0 ${dimensions.width} ${dimensions.height}`);
@@ -150,6 +162,7 @@ layout: blog
             .scale(yScale);
 
         const xAxisGenerator = axisBottom()
+            .ticks(timeMonth.every(1))
             .scale(xScale);
 
         const yAxis = bounds.append('g')
@@ -211,15 +224,15 @@ layout: blog
         
   }
 
-  console.log('chartElement', chartElement);
+  // console.log('chartElement', chartElement);
 
   onMount(() => {
     const allCommits = getData('api/commits').then((data) => {
-      console.log(data);
+      // console.log(data);
       const parsed = parseData(data);
       buildChart(parsed);
     });
-    console.log('totalCommits', totalCommits);
+    // console.log('totalCommits', totalCommits);
   });
 
 </script>

@@ -23,6 +23,7 @@ devDependencies:
   d3-scale: 3.2.3
   d3-selection: 2.0.0
   d3-shape: 2.0.0
+  d3-time: 2.0.0
   d3-time-format: 3.0.0
   dotenv: 8.2.0
   eslint: 7.15.0
@@ -4719,6 +4720,7 @@ specifiers:
   d3-scale-chromatic: ^2.0.0
   d3-selection: ^2.0.0
   d3-shape: ^2.0.0
+  d3-time: ^2.0.0
   d3-time-format: ^3.0.0
   dotenv: ^8.2.0
   eslint: ^7.15.0
