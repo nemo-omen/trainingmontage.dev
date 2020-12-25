@@ -27,7 +27,7 @@
     margin: 0 auto;
     position: -webkit-sticky;
     position: sticky;
-    top: 2rem;
+    top: var(--main-padding);
   }
   .toc-heading {
     font-size: 1.875rem;
@@ -49,12 +49,11 @@
   .top-link {
     margin-top: 1rem;
   }
-
-  /* @media (min-width: 1024px) {
-        .table-of-contents {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 20px;
-        }
-    } */
+  @media (min-width: 1024px) {
+    .table-of-contents {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 20px;
+    }
+  }
 </style>

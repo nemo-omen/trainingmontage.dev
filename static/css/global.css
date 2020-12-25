@@ -20,7 +20,11 @@
     --h2: clamp(2.35rem, 9vw, 2.82rem);
     --h1: clamp(3.12rem, 10vw, 3.75rem);
     
-    --font-size: clamp(1rem, 2vw, 1.2rem)
+    --font-size: clamp(1rem, 2vw, 1.2rem);
+
+    --spacer: clamp(2rem, 3v2, 5rem);
+
+    --main-padding: 3vw;
     }
 
 * {
@@ -46,7 +50,7 @@ html, body {
 }
 
 main {
-    padding: 3vw;
+    padding: var(--main-padding);
 }
 
 img {
@@ -95,11 +99,11 @@ h4 {
 }
 
 main > * + * {
-    margin-top: clamp(2rem, 3vw, 5rem);
+    margin-top: var(--spacer);
 }
 
 .post-section > * + *, .tweets-section > * + * {
-    margin-top: clamp(2rem, 3vw, 5rem);
+    margin-top: var(--spacer);
 }
 
 @media (min-width: 1024px) {

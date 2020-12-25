@@ -58,7 +58,7 @@
     word-break: break-word;
   }
   .sidebar-body {
-    padding: 3vw;
+    padding: var(--main-padding);
   }
   .sidebar-body > * + * {
     margin-top: 3vw;
@@ -71,6 +71,9 @@
   }
   .expo {
     font-style: italic;
+  }
+  .extra {
+    height: var(--sidebarHeight);
   }
   :global(.sidebar a) {
     color: var(--light-blue);
