@@ -45,6 +45,13 @@
     font-family: var(--sans);
     font-weight: 400;
   }
+  .toc-item a {
+    text-decoration-color: var(--light-blue);
+  }
+
+  .toc-item a:hover {
+    text-decoration-color: var(--dark-blue);
+  }
 
   .top-link {
     margin-top: 1rem;

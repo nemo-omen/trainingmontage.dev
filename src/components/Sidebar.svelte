@@ -72,13 +72,16 @@
   .expo {
     font-style: italic;
   }
-  .extra {
-    height: var(--sidebarHeight);
-  }
   :global(.sidebar a) {
     color: var(--light-blue);
   }
   :global(.sidebar a:hover) {
     color: var(--blue);
+  }
+
+  @media (min-width: 1024px) {
+    .extra {
+      height: var(--sidebarHeight);
+    }
   }
 </style>
