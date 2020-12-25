@@ -1,7 +1,6 @@
 ---
 layout: blog
 title: Visualizing Pushes to GitHub with D3
-subtitle: Simple line charts with D3
 description: My Github push actions over the past 14 days, visualized with D3
 date: Sunday, December 6, 2020
 author: Jeff Caldwell

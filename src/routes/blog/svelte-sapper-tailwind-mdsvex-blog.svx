@@ -1,6 +1,5 @@
 ---
 title: 'Blogging with Sapper, Tailwind, and mdsvex: Part 1'
-subtitle: How I made this very blog.
 author: Jeff Caldwell
 description: How I made this site using Svelte/Sapper, TailwindCss, and mdsvex 
 tags: ['Svelte', 'Sapper', 'TailwindCss', 'mdsvex', 'Blog', 'Markdown', 'JavaScript', 'CSS', 'Tutorial', 'Web Development', 'pnpm']

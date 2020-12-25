@@ -7,8 +7,3 @@ publish = "__sapper__/export"
 
 [build]
 functions = "functions/"
-
-# [[redirects]]
-# from = "api/*"
-# status = 300
-# to = "/.netlify/functions/:splat"

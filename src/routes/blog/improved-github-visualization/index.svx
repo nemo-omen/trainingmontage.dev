@@ -1,6 +1,6 @@
 ---
 title: Improved Github Commits Visualization
-author: Jaff Caldwell
+author: Jeff Caldwell
 date: Wednesday, December 23, 2020
 description: Improving on my first Github commits visualization.
 layout: blog

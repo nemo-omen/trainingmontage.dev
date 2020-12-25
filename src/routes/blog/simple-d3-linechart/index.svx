@@ -1,0 +1,36 @@
+---
+title: Creating a simple line chart with D3 and Svelte
+description: Getting started with D3 by making a basic linechart
+author: Jeff Caldwell
+date: Thursday, December 24, 2020
+layout: blog
+toc: true
+---
+
+<script>
+  import { extent } from 'd3-array';
+  import { axisBottom, axisLeft } from 'd3-axis'
+  import { json as d3json } from 'd3-fetch';
+  import { path } from 'd3-path';
+  import { scaleLinear, scaleOrdinal, scaleTime, scaleBand } from 'd3-scale';
+  import { select } from 'd3-selection';
+  import { line, curveBasis, curveNatural, curveLinear, curveBundle, curveCardinal } from 'd3-shape';
+  import { timeMonth } from 'd3-time';
+  import { timeParse, timeFormat } from 'd3-time-format';
+
+  const currencyScoopKey = 'cc065459dec5c79c04d2c45510e6af62';
+
+  const baseApiUrl = 'https://api.currencyscoop.com/v1';
+
+
+
+</script>
+
+Let's get started by learning to use d3.fetch()
+
+First, because we're working within a frontend framework and don't really want to import all of D3 (because, you know, it's really big,) let's install `d3-fetch`.
+
+```bash
+pnpm install d3-fetch -D
+```
+Great, so now we need to decide on a resource to pull data from.
