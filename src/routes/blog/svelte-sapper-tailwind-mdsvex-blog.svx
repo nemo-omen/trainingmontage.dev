@@ -37,7 +37,7 @@ npx degit babichjacob/sapper-postcss-template#main .
 
 So, now we have a directory full of Jacob Babich's template files. Let's take a look at what's in there.
 
-<img src="img/posts/12-15-20/12-15-20_Screenshot01.png" alt="my-blog directory structure" loading="lazy" class="small-img" width="225" height="450">
+<img src="img/posts/12-15-20/12-15-20_Screenshot01.png" alt="my-blog directory structure" loading="lazy" class="vert" width="225" height="450">
 
 Mostly the template is the base Sapper template with some additional files that work to integrate Sapper with PostCss and Tailwind. Let's spin this sucker up and see what's what, shall we?
 

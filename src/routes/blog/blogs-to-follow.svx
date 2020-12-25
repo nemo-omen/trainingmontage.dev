@@ -42,6 +42,10 @@ This will be a running list of blogs I find useful.
 
 ## Especially useful posts
 
+[CSS min(), max() and clamp() functions](https://chipcullen.com/css-min-max-clamp-functions/)
+
+This is a great rundown of the `min()`, `max()`, and `clamp()` functions in CSS. Learning about how to use `clamp()` was especially useful in the design of this site. I was not only able to remove Tailwind as a dependency, but I was also able to further reduce the overall CSS payload while implementing truly responsive typography and spacing.
+
 [Building your color palette](https://refactoringui.com/previews/building-your-color-palette/)
 
 [Practical guide for learning frontend development for beginners](https://www.freecodecamp.org/news/a-practical-guide-to-learning-front-end-development-for-beginners-da6516505e41/)
