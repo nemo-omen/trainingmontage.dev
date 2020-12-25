@@ -23,7 +23,7 @@
 
 <style>
   .table-of-contents {
-    padding: 2rem 0;
+    /* padding: 2rem 0; */
     margin: 0 auto;
     position: -webkit-sticky;
     position: sticky;

@@ -16,6 +16,7 @@
   import PostItem from '../components/PostItem.svelte';
   import TweetItem from '../components/TweetItem.svelte';
   import Skills from '../components/Skills.svelte';
+  import WebIconsBar from '../components/WebIconsBar.svelte';
 
   export let posts;
   export let tweets;
@@ -27,7 +28,8 @@
   <!-- <h2>What I Work With</h2>
   <Skills /> -->
   <section class="contact-info">
-    <h2>On the web</h2>
+    <WebIconsBar />
+    <!-- <h2>On the web</h2>
     <p>
       twitter:
       <a href="https://twitter.com/trainingm0ntage">@trainingm0ntage</a>
@@ -35,18 +37,21 @@
     <p>
       LinkedIn:
       <a href="https://www.linkedin.com/in/jeff-caldwell-4424181a">Jeff Caldwell</a>
-    </p>
+    </p> -->
   </section>
 </Sidebar>
 <main>
   <section class="post-section">
-    <h2>Latest from the <a href="/blog" rel="prefetch">blog</a></h2>
+    <h2 class="section-heading">
+      Latest from the
+      <a href="/blog" rel="prefetch">blog</a>
+    </h2>
     {#each posts as post}
       <PostItem {post} />
     {/each}
   </section>
   <section class="tweets-section">
-    <h2>
+    <h2 class="section-heading">
       Latest from
       <a href="https://twitter.com/trainingm0ntage">Twitter</a>
     </h2>
@@ -57,10 +62,8 @@
 </main>
 
 <style>
-  .contact-info h2 {
-    margin-bottom: 0.5rem;
-  }
-  .contact-info p {
-    line-height: 1.2;
+  .section-heading {
+    line-height: 1;
+    margin: 0;
   }
 </style>

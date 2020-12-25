@@ -10,14 +10,17 @@
     --serif: 'Merriweather', Georgia, serif;
     --display: 'Oswald', sans-serif;
     --sans: 'Roboto', sans-serif;
+
     --font-size: 1.2rem;
     --ratio: 1.333;
     --ratio-alt: 1.68;
 
-    --h4: calc(var(--font-size) * var(--ratio));
-    --h3: calc(var(--h4) * var(--ratio));
-    --h2: calc(var(--h3) * var(--ratio));
-    --h1: calc(var(--h2) * var(--ratio));
+    --h4: calc(1.33rem, 5vw, 1.596rem);
+    --h3: clamp(1.76rem, 7vw, 2.12rem);
+    --h2: clamp(2.35rem, 9vw, 2.82rem);
+    --h1: clamp(3.12rem, 10vw, 3.75rem);
+    
+    --font-size: clamp(1rem, 2vw, 1.2rem)
     }
 
 * {
@@ -36,10 +39,6 @@ html, body {
     font-weight: 500;
 }
 
-/* body {
-    overflow-y: scroll;
-} */
-
 #app {
     display: flex;
     flex-direction: column;
@@ -47,12 +46,7 @@ html, body {
 }
 
 main {
-    padding: 2rem 1rem 1rem 1rem;
-    padding-top: 1rem;
-}
-
-main > * + * {
-    margin-top: 2rem;
+    padding: 3vw;
 }
 
 img {
@@ -78,7 +72,6 @@ a:hover {
 p {
     font-family: var(--serif);
     line-height: 2;
-    font-weight: 500;
 }
 
 h1, h2, h3, h4 {
@@ -89,112 +82,36 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-        /* font-weight: 700; */
-        /* font-size: 2.25rem; */
-        font-size: var(--h1);
+    font-size: var(--h1);
 }
 h2 {
-        /* font-weight: 700; */
-        /* font-size: 1.875rem; */
-        font-size: var(--h2);
+    font-size: var(--h2);
 }
 h3 {
-        /* font-weight: 700; */
-        /* font-size: 1.5rem; */
-        font-size: var(--h3);
+    font-size: var(--h3);
 }
 h4 {
-        /* font-weight: 600; */
-        /* font-size: 1.25rem; */
-        font-size: var(--h4);
+    font-size: var(--h4);
+}
+
+main > * + * {
+    margin-top: clamp(2rem, 3vw, 5rem);
 }
 
 .post-section > * + *, .tweets-section > * + * {
-    margin-top: 2rem;
-}
-
-@media (max-width: 40em) {
-    :root {
-        --font-size: 1rem;
-        --ratio: var(var(--ratio-alt));
-    }
-}
-
-@media (min-width: 600px) {
-    :root {
-        --font-size: 1rem;
-        --ratio: var(var(--ratio-alt));
-    }
-    body {
-        font-size: 1.125rem;
-    }
-    main {
-        padding: 2rem;
-    }
-    main > * + * {
-        margin-top: 2.5rem;
-    }
-    .post-section > * + *, .tweets-section > * + * {
-        margin-top: 2.25rem;
-    }
-}
-
-@media (min-width: 768px) {
-    :root {
-        --font-size: 1rem;
-    }
-    body {
-        font-size: 1.25rem;
-    }
-    main {
-        padding: 2.5rem;
-    }
-    main > * + * {
-        margin-top: 3rem;
-    }
-    .post-section > * + *, .tweets-section > * + * {
-        margin-top: 2.5rem;
-    }
+    margin-top: clamp(2rem, 3vw, 5rem);
 }
 
 @media (min-width: 1024px) {
-    body {
-        font-size: 1.25rem;
-    }
     #app {
         flex-direction: row;
     }
-    main {
-        padding: 2.75rem;
-        width: 60%;
-        max-width: 60%;
-        padding-right: 4rem;
-    }
-    main > * + * {
-        margin-top: 3.5rem;
-    }
-    .post-section > * + *, .tweets-section > * + * {
-        margin-top: 2.75rem;
-    }
-}
-
-@media (min-width: 1280px) {
-    body {
-        font-size: 1.25rem;
-    }
-    #app {
-        flex-direction: row;
+    .sidebar {
+        width: 33vw;
+        min-width: 33vw;
     }
     main {
-        padding: 3rem;
-        padding-right: 10%;
-        width: 67%;
-        max-width: 67%;
-    }
-    main > * + * {
-        margin-top: 4rem;
-    }
-    .post-section > * + *, .tweets-section > * + * {
-        margin-top: 3rem;
+        width: 67vw;
+        max-width: 67vw;
     }
 }

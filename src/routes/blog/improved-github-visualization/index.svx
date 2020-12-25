@@ -239,7 +239,7 @@ layout: blog
 
 
 <section class="commits">
-<h3><span class="highlight">{totalCommits}</span> commits in <span class="highlight">{reposLength}</span> repositories from <span class="highlight">{sortedDates[0]}</span> to <span class="highlight">{sortedDates[sortedDates.length - 1]}</span></h3>
+<h4><span class="highlight">{totalCommits}</span> commits in <span class="highlight">{reposLength}</span> repositories from <span class="highlight">{sortedDates[0]}</span> to <span class="highlight">{sortedDates[sortedDates.length - 1]}</span></h4>
 
   <section class="chart" bind:this={chartElement}>
 
@@ -258,7 +258,7 @@ I'm trying to use the wrong type of visualization for the data. I want to commun
 What we need is a bar chart.
 
 <section class="commits">
-<h3><span class="highlight">{totalCommits}</span> commits in <span class="highlight">{reposLength}</span> repositories from <span class="highlight">{sortedDates[0]}</span> to <span class="highlight">{sortedDates[sortedDates.length - 1]}</span></h3>
+<h4><span class="highlight">{totalCommits}</span> commits in <span class="highlight">{reposLength}</span> repositories from <span class="highlight">{sortedDates[0]}</span> to <span class="highlight">{sortedDates[sortedDates.length - 1]}</span></h4>
 
   <section class="chart" bind:this={barChartElement}>
 
