@@ -10,6 +10,7 @@
     --serif: 'Merriweather', Georgia, serif;
     --display: 'Oswald', sans-serif;
     --sans: 'Roboto', sans-serif;
+
     --font-size: 1.2rem;
     --ratio: 1.333;
     --ratio-alt: 1.68;
@@ -36,10 +37,6 @@ html, body {
     font-weight: 500;
 }
 
-/* body {
-    overflow-y: scroll;
-} */
-
 #app {
     display: flex;
     flex-direction: column;
@@ -47,12 +44,7 @@ html, body {
 }
 
 main {
-    padding: 2rem 1rem 1rem 1rem;
-    padding-top: 1rem;
-}
-
-main > * + * {
-    margin-top: 2rem;
+    padding: 3vw;
 }
 
 img {
@@ -89,112 +81,18 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-        /* font-weight: 700; */
-        /* font-size: 2.25rem; */
         font-size: var(--h1);
 }
 h2 {
-        /* font-weight: 700; */
-        /* font-size: 1.875rem; */
         font-size: var(--h2);
 }
 h3 {
-        /* font-weight: 700; */
-        /* font-size: 1.5rem; */
         font-size: var(--h3);
 }
 h4 {
-        /* font-weight: 600; */
-        /* font-size: 1.25rem; */
         font-size: var(--h4);
 }
 
 .post-section > * + *, .tweets-section > * + * {
     margin-top: 2rem;
-}
-
-@media (max-width: 40em) {
-    :root {
-        --font-size: 1rem;
-        --ratio: var(var(--ratio-alt));
-    }
-}
-
-@media (min-width: 600px) {
-    :root {
-        --font-size: 1rem;
-        --ratio: var(var(--ratio-alt));
-    }
-    body {
-        font-size: 1.125rem;
-    }
-    main {
-        padding: 2rem;
-    }
-    main > * + * {
-        margin-top: 2.5rem;
-    }
-    .post-section > * + *, .tweets-section > * + * {
-        margin-top: 2.25rem;
-    }
-}
-
-@media (min-width: 768px) {
-    :root {
-        --font-size: 1rem;
-    }
-    body {
-        font-size: 1.25rem;
-    }
-    main {
-        padding: 2.5rem;
-    }
-    main > * + * {
-        margin-top: 3rem;
-    }
-    .post-section > * + *, .tweets-section > * + * {
-        margin-top: 2.5rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    body {
-        font-size: 1.25rem;
-    }
-    #app {
-        flex-direction: row;
-    }
-    main {
-        padding: 2.75rem;
-        width: 60%;
-        max-width: 60%;
-        padding-right: 4rem;
-    }
-    main > * + * {
-        margin-top: 3.5rem;
-    }
-    .post-section > * + *, .tweets-section > * + * {
-        margin-top: 2.75rem;
-    }
-}
-
-@media (min-width: 1280px) {
-    body {
-        font-size: 1.25rem;
-    }
-    #app {
-        flex-direction: row;
-    }
-    main {
-        padding: 3rem;
-        padding-right: 10%;
-        width: 67%;
-        max-width: 67%;
-    }
-    main > * + * {
-        margin-top: 4rem;
-    }
-    .post-section > * + *, .tweets-section > * + * {
-        margin-top: 3rem;
-    }
 }
