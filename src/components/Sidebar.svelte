@@ -52,8 +52,10 @@
   }
   .heading-xl {
     font-weight: 400;
-    line-height: 1;
+    /* line-height: 1; */
     margin: 0;
+    font-size: var(--h1);
+    word-break: break-word;
   }
   .sidebar-body {
     padding: 3vw;
