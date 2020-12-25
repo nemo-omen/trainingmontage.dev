@@ -24,6 +24,7 @@
 	nav {
 		display: flex;
 		gap: 2rem;
+		padding: 0.5rem 0 1rem 0;
 	}
 	.icon {
 		font-size: 1.5rem;
