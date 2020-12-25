@@ -21,7 +21,7 @@
         display: flex;
         flex-direction: row;
         font-family: var(--sans);
-        padding: 0 1rem;
+        padding: 0 2rem;
     }
     nav a {
         display: block;
