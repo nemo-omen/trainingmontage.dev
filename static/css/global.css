@@ -15,11 +15,11 @@
     --ratio: 1.333;
     --ratio-alt: 1.68;
 
-    --h4: calc(1.33rem, 5vw, 1.596rem);
-    --h3: clamp(1.76rem, 7vw, 2.12rem);
-    --h2: clamp(2.35rem, 9vw, 2.82rem);
-    --h1: clamp(3.12rem, 10vw, 3.75rem);
-    
+    --h4: calc(1.25rem, 5vw, 1.563rem);
+    --h3: clamp(1.563rem, 7vw, 1.953rem);
+    --h2: clamp(1.953rem, 9vw, 2.441rem);
+    --h1: clamp(2.441rem, 10vw, 3.052rem);
+
     --font-size: clamp(1rem, 2vw, 1.2rem);
 
     --spacer: clamp(2rem, 3vw, 5rem);

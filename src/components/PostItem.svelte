@@ -4,10 +4,12 @@
 
 <article class="post-item">
     <header class="post-item-header">
+        <h3 class="post-item-title">
             <a href={post.path} title={post.title}>
-                <h2 class="post-item-title">{post.title}</h2>
+                {post.title}
             </a>
-            <p class="post-item-meta">{post.date}</p>
+        </h3>
+        <p class="post-item-meta">{post.date}</p>
         </header>
         <section class="post-item-body">
             <p>
