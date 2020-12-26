@@ -20,5 +20,3 @@
   that gives you immediate feedback when you change a given value. Think of it
   as an interactive cheatsheet.
 </p>
-
-<p />
