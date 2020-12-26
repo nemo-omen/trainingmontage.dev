@@ -1,0 +1,110 @@
+---
+title: Making an easy sidebar with flexbox
+description: A simple, foolproof way to make a sidebar with flexbox
+author: Jeff Caldwell
+date: Saturday, December 26, 2020
+layout: blog
+---
+
+<script>
+  import Showoff from './_components/Showoff.svelte';
+  import Showoff1 from './_components/Showoff1.svelte';
+  import Showoff2 from './_components/Showoff2.svelte';
+  import Showoff3 from './_components/Showoff3.svelte';
+</script>
+
+Sidebars are a common layout element for websites. So common, you'd expect them to be easy to implement.
+
+Unfortunately, this hasn't always been the case. The very existence of a [holy grail]() layout attests to the fact that full-length sidebars have historically difficult and counterintuitive to pull off with CSS.
+
+Things are much easier than they used to be and we now have tools like flexbox and grid we can use to make horizontal layouts pretty trivial.
+
+Let's go over a simple way to make a sidebar using flexbox.
+
+## The structure
+
+Our markup for this layout is going to be pretty basic. We'll use [semantic markup](https://www.freecodecamp.org/news/semantic-html5-elements/) to make sure our HTML clearly communicates its intentions.
+
+```html
+<body>
+  <section id="app">
+    <header>
+      <h1>Page Title</h1>
+    </header>
+    <section class="main-content">
+    <main>
+      <h2>Content</h2>
+    </main>
+    <aside>
+      <h2>Sidebar</h2>
+    </aside>
+    </section>
+    <footer>
+      <h2>Footer</h2>  
+    </footer>
+  </section>
+</body>
+```
+
+This will give you a nice, boring stack of elements, just the way HTML has always done things. I've gone ahead and styled each element just a bit so our demo is nicer to look at than plain HTML.
+
+<Showoff/>
+
+Okay, first we need to make sure the content spans the entire length of the screen. Let's do that by setting our `#app` to be positioned absolutely. Then, we just make sure all of our sides are set to `0` so it fills the screen. We also need to set `display: flex` and `flex-direction: column`.
+
+```css
+#app {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+```
+
+The appearance of the layout won't change yet. What we need to do is set `display: flex`, `flex-direction: row`, and `height: 100%` on `main-content`.
+
+```css
+.main-content {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+```
+
+<Showoff1 />
+
+Okay, now we almost have what we want. Let's get the rest of the way. With this flexbox method, we need to specify both the widths of the `sidebar` and `main`. There's just a bit more, though. We also need to specify `min-width` for the sidebar and `max-width` for main content so that both are always the same width.
+
+```css
+.sidebar {
+  width: 30%;
+  min-width: 30%
+}
+.main {
+  width: 70%;
+  min-width: 70%;
+}
+```
+
+<Showoff2 />
+
+<Showoff3 />
+
+```svelte
+<script>
+  console.log('Whatever');
+</script>
+
+<h1>Whatever</h1>
+
+<style>
+  h1 {
+    color: var(--accent);
+  }
+</style>
+```
+
+<img src="img/posts/12-15-20/12-15-20_Screenshot02.png" alt="An image" width="800" height="450" />

@@ -1,6 +1,7 @@
 <script>
   import BoxSizing from './components/BoxSizing.svx';
   import Sidebar from '../../components/Sidebar.svelte';
+  import { log } from 'console';
 </script>
 
 <svelte:head>

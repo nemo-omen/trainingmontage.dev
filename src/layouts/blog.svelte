@@ -44,22 +44,24 @@
 
 <svelte:head>
   <link rel="stylesheet" href="css/prism-nord.css" />
+  <meta name="description" content={description} />
 </svelte:head>
+
 <Sidebar
   meta={{ author: author, date: date }}
   {title}
   expo={description}
   tocList={toc === true ? headings : undefined} />
 <main>
-  <section class="blog-section" bind:this={postSection}>
+  <section class="post-section" bind:this={postSection}>
     <slot />
   </section>
 </main>
 
 <style>
-  :global(.blog-section p) {
+  /* :global(.blog-section p) {
     margin-bottom: 3rem;
-  }
+  } */
   :global(code:not(pre)) {
     font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
     color: var(--light-gray);
@@ -68,14 +70,19 @@
     padding: 0 0.25rem 3px 0.25rem;
   }
 
-  :global(.blog-section pre) {
+  :global(.post-section pre) {
     background-color: var(--dark-gray) !important;
     border-radius: 0 !important;
-    margin-bottom: 3rem !important;
   }
-  :global(.blog-section pre code) {
+  :global(.post-section pre code) {
     font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
     font-weight: 400;
+  }
+
+  @media (min-width: 1024px) {
+    :global(.post-section pre code) {
+      white-space: pre-wrap;
+    }
   }
 
   /* deal with first-line indentation issues from prism */

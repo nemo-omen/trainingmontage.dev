@@ -48,7 +48,11 @@ html, body {
 #app {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    min-height: 100%;
 }
 
 main {
@@ -120,11 +124,13 @@ main > * + * {
         flex-direction: row;
     }
     .sidebar {
-        width: 33vw;
-        min-width: 33vw;
+        /* width: 33vw;
+        min-width: 33vw; */
+        flex: 1;
     }
     main {
-        width: 67vw;
-        max-width: 67vw;
+        /* width: 67vw;
+        max-width: 67vw; */
+        flex: 2;
     }
 }

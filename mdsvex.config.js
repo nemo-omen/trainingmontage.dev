@@ -25,7 +25,7 @@ export const mdsvexOptions = mdsvex({
         const escaped = parsed.replace(/{/g, '&#123;').replace(/}/g, '&#125;');
         const langTag = 'language-' + lang;
         const codeTag = `<code class="${langTag}">${escaped}</code>`;
-        const wrapped = `<pre class="${langTag} code-pre line-numbers">${codeTag}</pre>`;
+        const wrapped = `<pre class="${langTag}">${codeTag}</pre>`;
         return wrapped;
       } else {
         const escaped = code.replace(/{/g, '&#123;').replace(/}/g, '&#125;');

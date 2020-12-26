@@ -1,12 +1,3 @@
----
-title: 'Blogging with Sapper, Tailwind, and mdsvex: Part 1'
-subtitle: How I made this very blog.
-author: Jeff Caldwell
-description: How I made this site using Svelte/Sapper, TailwindCss, and mdsvex 
-date: Tuesday, December 15, 2020
-layout: blog
-toc: true
----
 
 Learning frontend web-development can be pretty tough. Aside from the months you have to spend learning all of the basics of CSS, HTML, and JavaScript, you have to contend with a myriad of available frameworks, build tools, hosting, and on, and on. So it's nice when people make libraries and tools to make that process easier.
 
@@ -100,7 +91,7 @@ module.exports = {
 Normally, this stuff would be in `rollup.config.js`, but it's been separated into its own module here. This is where we'll add mdsvex later. For now, just know that this is where we'll be setting up any preprocessors. This file requires `postcss.config.js`, so let's take a look at that file next.
 
 ```js
-// postcss.config.js
+//postcss.config.js
 
 const cssnano = require("cssnano");
 const postcssImport = require("postcss-import");
@@ -127,6 +118,7 @@ module.exports = {
 		}),
 	].filter(Boolean),
 };
+
 ```
 
 This is where we start getting into the nitty-gritty of making PostCss and Tailwind work with Svelte. If you have PostCss plugins to add, this is the place to do that. Let's look at the other important config file that this file imports, `tailwind.config.js`
@@ -165,7 +157,6 @@ module.exports = {
 };
 
 ```
-
 
 For the most part, this file is exactly the same as the default `tailwind.config.js` that comes when you initialize a new Tailwind project, with one big exception: `defaultExtractor`. This is a custom function for matching against Svelte [class](https://svelte.dev/docs#class_name) directives. This function is part of the reason this template is so awesome. Don't mess with that function if you don't know what you're doing! Otherwise, this is where you'll customize your tailwind configuration.
 
@@ -363,7 +354,6 @@ Okay, so it's ugly. But, hey, it works! Let's add some stuff to the `blog.svelte
 </style>
 
 ```
-
 <img src="img/posts/12-15-20/12-15-20_Screenshot05.png" alt="Very stylish version of an mdsvex component" loading="lazy" width="800" height="450">
 
 Okay, now you can see that `greeting`, defined in the frontmatter of `index.svx` can be used as a prop in the `blog.svelte` layout file. We can also use the frontmatter properties in the `.svx` file itself. We can also use Tailwind's `@apply` syntax to, well, apply Tailwind class styles to the markdown content that's added to our layout component. There's a _lot_ more you can do with mdsvex, and we'll get into some of it in the next part.
