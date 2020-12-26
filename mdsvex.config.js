@@ -15,6 +15,7 @@ export const mdsvexOptions = mdsvex({
   layout: {
     default: path.resolve(__dirname, 'src/layouts/default.svelte'),
     blog: path.resolve(__dirname, 'src/layouts/blog.svelte'),
+    component: path.resolve(__dirname, 'src/layouts/component.svelte'),
   },
   rehypePlugins: [slug],
   highlight: {

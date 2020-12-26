@@ -1,0 +1,134 @@
+---
+layout: component
+---
+
+<script>
+
+  const sizingTypes = ['content-box', 'border-box'];
+
+  let selectedSizingType = 'content-box';
+
+  let codeblock = `.demo {
+    border: 8px solid #e5e7eb;
+    background-color: #ffbb28;
+    padding: 2rem;
+    height: 150px;
+    width: 300px;
+    box-sizing: content-box;
+  }`;
+
+  function setCodingBlock() {
+    if(selectedSizingType !== 'content-box') {
+      codeblock = `.demo {
+    border: 8px solid #e5e7eb;
+    background-color: #ffbb28;
+    padding: 2rem;
+    height: 150px;
+    width: 300px;
+    box-sizing: content-box;
+  }`
+    } else {
+      codeblock = `.demo {
+    border: 8px solid #e5e7eb;
+    background-color: #ffbb28;
+    padding: 2rem;
+    height: 150px;
+    width: 300px;
+    box-sizing: border-box;
+  }`;
+    }
+  }
+</script>
+
+<pre class="language-css">
+  <code class="language-css">
+  {@html codeblock}
+  </code>
+</pre>
+
+<article class="playground">
+  <header class="control">
+    {#each sizingTypes as value}
+      <label><input
+          type="radio"
+          {value}
+          bind:group={selectedSizingType} on:input={setCodingBlock} />{value}</label>
+    {/each}
+  </header>
+  <section class="body">
+    <div class="demo-wrapper">
+      <div class="demo" style="box-sizing: {selectedSizingType}">
+        <div class="show-inner">
+          <h3>{selectedSizingType}</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>
+
+<style>
+  .playground {
+    width: 100%;
+    height: 500px;
+    background-color: var(--dark-gray);
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+  .control {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
+  }
+  .control label {
+    color: var(--light-gray);
+  }
+  .body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .demo-wrapper {
+    height: 300px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .demo {
+    position: relative;
+    background-color: var(--accent-dark);
+    height: 150px;
+    width: 300px;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .show-inner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: var(--accent);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 300px;
+  }
+  .demo h3 {
+    color: var(--light-gray);
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+  }
+  :global(.content) {
+    box-sizing: content-box;
+  }
+  :global(.border) {
+    box-sizing: border-box;
+  }
+</style>

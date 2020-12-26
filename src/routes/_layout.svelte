@@ -3,6 +3,7 @@
 </script>
 
 <script>
+  import { onMount } from 'svelte';
   import { stores } from '@sapper/app';
 
   // You may not want to use `segment`, but it is passed for the time being and will
@@ -16,10 +17,13 @@
 
   const { page } = stores();
   $: path = $page.path.slice(1);
+  onMount(() => {
+    console.log(path);
+  });
 </script>
 
 <svelte:head>
-  <title>{path ? path.charAt(0).toUpperCase() + path.slice(1) : 'Index'}</title>
+  <title>{path ? path.charAt(0).toUpperCase() + path.slice(1) : 'Home'}</title>
 </svelte:head>
 <div id="app">
   <slot />
