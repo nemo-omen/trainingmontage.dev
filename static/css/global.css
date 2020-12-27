@@ -52,6 +52,7 @@ html, body {
     top: 0;
     right: 0;
     left: 0;
+    /* bottom: 0; */
     min-height: 100%;
 }
 
@@ -124,13 +125,9 @@ main > * + * {
         flex-direction: row;
     }
     .sidebar {
-        /* width: 33vw;
-        min-width: 33vw; */
         flex: 1;
     }
     main {
-        /* width: 67vw;
-        max-width: 67vw; */
         flex: 2;
     }
 }

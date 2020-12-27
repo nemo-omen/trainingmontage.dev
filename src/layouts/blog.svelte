@@ -45,6 +45,7 @@
 <svelte:head>
   <link rel="stylesheet" href="css/prism-nord.css" />
   <meta name="description" content={description} />
+  <title>{title} | trainingmontage</title>
 </svelte:head>
 
 <Sidebar

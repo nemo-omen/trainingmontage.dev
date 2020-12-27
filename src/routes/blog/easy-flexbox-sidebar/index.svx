@@ -35,7 +35,7 @@ Our markup for this layout is going to be pretty basic. We'll use [semantic mark
     <main>
       <h2>Content</h2>
     </main>
-    <aside>
+    <aside class="sidebar">
       <h2>Sidebar</h2>
     </aside>
     </section>
@@ -56,55 +56,70 @@ Okay, first we need to make sure the content spans the entire length of the scre
 #app {
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
 }
 ```
 
-The appearance of the layout won't change yet. What we need to do is set `display: flex`, `flex-direction: row`, and `height: 100%` on `main-content`.
+The appearance of the layout won't change yet. What we need to do is set `display: flex`, `flex-direction: row`, and `min-height: 100%` on `main-content`. But, wait! Let's set it inside a media query so that our layout only orients horizontally when the screen's wide enough to not make it weird.
 
 ```css
+#app {
+  ...
+}
 .main-content {
   display: flex;
-  flex-direction: row;
-  height: 100%;
+  flex-direction: column;
+}
+@media (min-width: 900px) {
+  .main-content {
+    flex-direction: row;
+    min-height: 100%;
+  }
 }
 ```
 
 <Showoff1 />
 
-Okay, now we almost have what we want. Let's get the rest of the way. With this flexbox method, we need to specify both the widths of the `sidebar` and `main`. There's just a bit more, though. We also need to specify `min-width` for the sidebar and `max-width` for main content so that both are always the same width.
+Okay, now we almost have what we want. Let's get the rest of the way. With this flexbox method, we need to specify both the widths of the `sidebar` and `main`. We can do that by setting the `flex` property. Let's do this within the media query so it only applies after the screen reaches a certain width.
 
 ```css
-.sidebar {
-  width: 30%;
-  min-width: 30%
-}
-.main {
-  width: 70%;
-  min-width: 70%;
+@media (min-width: 900px) {
+  .main-content {
+    ...
+  }
+  .sidebar {
+    flex: 1;
+  }
+  main {
+    flex: 2; 
+    // you can make this a higher number if you want main to take up more space
+  }
 }
 ```
 
 <Showoff2 />
 
-<Showoff3 />
+Now, we can make one more change so `sidebar` is displayed before `main`.
 
-```svelte
-<script>
-  console.log('Whatever');
-</script>
+```diff
+.sidebar {
+    flex: 1;
+    min-height: 100%,
++  order: 1;
+}
 
-<h1>Whatever</h1>
-
-<style>
-  h1 {
-    color: var(--accent);
-  }
-</style>
+main {
+    flex: 2;
++  order: 2;
+}
 ```
 
-<img src="img/posts/12-15-20/12-15-20_Screenshot02.png" alt="An image" width="800" height="450" />
+<Showoff3 />
+
+That's pretty much it! 
+
+This is only one way to make full-length sidebars with CSS. I'll revisit this soon to make the same layout with CSS grid.

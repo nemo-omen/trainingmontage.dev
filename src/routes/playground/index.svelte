@@ -1,7 +1,6 @@
 <script>
   import BoxSizing from './components/BoxSizing.svx';
   import Sidebar from '../../components/Sidebar.svelte';
-  import { log } from 'console';
 </script>
 
 <svelte:head>
@@ -30,7 +29,7 @@
       Think of it as an interactive cheatsheet.
     </p>
 
-    <h2>Box Model</h2>
+    <!-- <h2>Box Model</h2>
     <p>
       Everything in CSS revolves, more or less, around the
       <em>box model</em>.
@@ -38,6 +37,7 @@
     <section class="demo">
       <BoxSizing />
     </section>
+  </section> -->
   </section>
 </main>
 
