@@ -15,7 +15,7 @@ layout: blog
 
 Sidebars are a common layout element for websites. So common, you'd expect them to be easy to implement.
 
-Unfortunately, this hasn't always been the case. The very existence of a [holy grail]() layout attests to the fact that full-length sidebars have historically difficult and counterintuitive to pull off with CSS.
+Unfortunately, this hasn't always been the case. The very existence of a [holy grail](https://alistapart.com/article/holygrail/) layout attests to the fact that full-length sidebars have historically difficult and counterintuitive to pull off with CSS.
 
 Things are much easier than they used to be and we now have tools like flexbox and grid we can use to make horizontal layouts pretty trivial.
 
