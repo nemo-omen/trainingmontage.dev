@@ -13,6 +13,10 @@ layout: blog
   import Showoff3 from './_components/Showoff3.svelte';
 </script>
 
+<svelte:head>
+<script async defer src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+</svelte:head>
+
 Sidebars are a common layout element for websites. So common, you'd expect them to be easy to implement.
 
 Unfortunately, this hasn't always been the case. The very existence of a [holy grail](https://alistapart.com/article/holygrail/) layout attests to the fact that full-length sidebars have historically difficult and counterintuitive to pull off with CSS.
@@ -121,5 +125,14 @@ main {
 <Showoff3 />
 
 That's pretty much it! 
+
+Check out the full code on codepen:
+
+<p class="codepen" data-height="306" data-theme-id="dark" data-default-tab="css,result" data-user="jeff-caldwell" data-slug-hash="KKgyyxJ" data-preview="true" style="height: 306px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Easy Flexbox Sidebar">
+  <span>See the Pen <a href="https://codepen.io/jeff-caldwell/pen/KKgyyxJ">
+  Easy Flexbox Sidebar</a> by Jeff Caldwell (<a href="https://codepen.io/jeff-caldwell">@jeff-caldwell</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+
 
 This is only one way to make full-length sidebars with CSS. I'll revisit this soon to make the same layout with CSS grid.
