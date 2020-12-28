@@ -50,7 +50,6 @@
 </svelte:head>
 
 <Sidebar
-  meta={{ author: author, date: date }}
   {title}
   expo={description}
   tocList={toc === true ? headings : undefined} />
@@ -61,9 +60,6 @@
 </main>
 
 <style>
-  /* :global(.blog-section p) {
-    margin-bottom: 3rem;
-  } */
   :global(code:not(pre)) {
     font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
     color: var(--light-gray);

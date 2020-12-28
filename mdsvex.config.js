@@ -16,6 +16,7 @@ export const mdsvexOptions = mdsvex({
     default: path.resolve(__dirname, 'src/layouts/default.svelte'),
     blog: path.resolve(__dirname, 'src/layouts/blog.svelte'),
     component: path.resolve(__dirname, 'src/layouts/component.svelte'),
+    docs: path.resolve(__dirname, 'src/layouts/docs.svelte'),
   },
   rehypePlugins: [slug],
   highlight: {
@@ -29,7 +30,7 @@ export const mdsvexOptions = mdsvex({
         return wrapped;
       } else {
         const escaped = code.replace(/{/g, '&#123;').replace(/}/g, '&#125;');
-        return `<pre class="code-pre line-numbers"><code>${escaped}</code></pre>`;
+        return `<pre class="code-pre"><code>${escaped}</code></pre>`;
       }
     },
   },

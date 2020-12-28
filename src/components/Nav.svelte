@@ -20,6 +20,10 @@
     rel="prefetch"
     class={$page.path === '/blog' || splitPage[1] === 'blog' ? 'active' : 'normal'}>blog</a>
   <a
+    href="/docs"
+    rel="prefetch"
+    class={$page.path === '/docs' ? 'active' : 'normal'}>docs</a>
+  <a
     href="/about"
     rel="prefetch"
     class={$page.path === '/about' ? 'active' : 'normal'}>about</a>

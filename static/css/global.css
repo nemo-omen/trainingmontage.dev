@@ -130,4 +130,7 @@ main > * + * {
     main {
         flex: 2;
     }
+    .post-section {
+        max-width: 90ch;
+    }
 }

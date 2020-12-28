@@ -79,6 +79,13 @@
     color: var(--blue);
   }
 
+  :global(.extra a) {
+    text-decoration-color: var(--light-blue);
+  }
+  :global(.extra a:hover) {
+    text-decoration-color: var(--blue);
+  }
+
   @media (min-width: 1024px) {
     .extra {
       height: var(--sidebarHeight);
